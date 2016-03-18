@@ -30,4 +30,4 @@ end
 
 gem 'devise'
 gem 'paperclip'
-
+gem 'semantic-ui-sass'
