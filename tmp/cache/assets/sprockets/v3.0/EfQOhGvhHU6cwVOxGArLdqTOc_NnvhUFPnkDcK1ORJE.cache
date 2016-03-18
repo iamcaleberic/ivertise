@@ -1,0 +1,5 @@
+I"=(function() {
+  $('.menu .item').tab();
+
+}).call(this);
+:ET

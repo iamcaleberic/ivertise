@@ -1,3 +1,4 @@
+<!-- header -->
 <div class="ui fixed white menu" style="margin-bottom: 50px">
     <div class="ui container">
       <%=image_tag("logo.png")%>
@@ -5,7 +6,8 @@
         
      
       </a>
-      <a href="#" class="item">Home</a>
+      <%=link_to "Home" , root_path , :class =>"item" %>
+      
       <!-- <div class="ui simple dropdown item">
      <i class="dropdown icon"></i>
         <div class="menu">
@@ -24,15 +26,18 @@
           <a class="item" href="#">Link Item</a>
         </div>
       </div> -->
-      <a href="" class="item">Images</a>
-      <a href="#" class="item">Photographers</a>
-      <a href="#" class="item">MUA</a>
-      <a href="#" class="item">Models</a>
+      <%=link_to "Images" , images_index_path , :class =>"item" %>
+      <%=link_to "Photographers" , photographers_index_path , :class =>"item" %>
+      <%=link_to "MUA" , mua_index_path , :class =>"item" %>
+      <%=link_to "Models" , models_index_path , :class =>"item" %>
+      
     </div>
+     <a href="" class="item">Register</a>
+      <a href="" class="item">Log In</a>
   </div>
-
+<!-- end -->
 <h1>Hello</h1>
-
+<!-- banner and search -->
 <div class="banner">
 
 <center><div class="ui action input" id="search">
@@ -46,51 +51,20 @@
   <div type="submit" class="ui button">Search</div>
 </div></center>
 </div>
+<!-- end -->
+<div class="ui top attached tabular menu">
+  <a class="item active" data-tab="first">First</a>
+  <a class="item" data-tab="second">Second</a>
+  <a class="item" data-tab="third">Third</a>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="first">
+  First
+</div>
+<div class="ui bottom attached tab segment" data-tab="second">
+  Second
+</div>
+<div class="ui bottom attached tab segment" data-tab="third">
+  Third
+</div>
 
-
- <div class="ui footer segment">
-    <div class="ui center aligned container">
-      <div class="ui stackable  divided grid">
-        <div class="three wide column">
-          <h4 class="ui  header">Group 1</h4>
-          <div class="ui  link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui  header">Group 2</h4>
-          <div class="ui  link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui  header">Group 3</h4>
-          <div class="ui  link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui  header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-        </div>
-      </div>
-      <div class="ui  section divider"></div>
-        <%=image_tag("logo.png")%>
-        <br>
-      <div class="ui horizontal  small divided link list">
-        <a class="item" href="#">Site Map</a>
-        <a class="item" href="#">Contact Us</a>
-        <a class="item" href="#">Terms and Conditions</a>
-        <a class="item" href="#">Privacy Policy</a>
-      </div>
-    </div>
-  </div>
+<%=render "layouts/footer"%>

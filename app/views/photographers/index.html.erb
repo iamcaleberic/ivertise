@@ -3,7 +3,7 @@
    <!-- 
       <a href="#" class="header item">
       </a> -->
-      <a href="#" class="item">Home</a>
+       <%=link_to "Home" , root_path , :class =>"item" %>
       <!-- <div class="ui simple dropdown item">
      <i class="dropdown icon"></i>
         <div class="menu">
@@ -22,12 +22,19 @@
           <a class="item" href="#">Link Item</a>
         </div>
       </div> -->
-      <a href="#" class="item">Images</a>
-      <a href="#" class="item">Photographers</a>
-      <a href="#" class="item">MUA</a>
-      <a href="#" class="item">Models</a>
+       <%=link_to "Images" , images_index_path , :class =>"item" %>
+      <%=link_to "Photographers" , photographers_index_path , :class =>"item" %>
+      <%=link_to "MUA" , mua_index_path , :class =>"item" %>
+      <%=link_to "Models" , models_index_path , :class =>"item" %>
     </div>
   </div>
   <br>
   <br>
+  
      <%=image_tag("logo.png")%>
+       <center><div class="ui icon input">
+
+  <input placeholder="Search..." type="text">
+  <i class="inverted circular search link icon"></i>
+</div></center>
+   
