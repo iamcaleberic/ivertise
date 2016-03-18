@@ -1,0 +1,2 @@
+class MuaController < ApplicationController
+end
