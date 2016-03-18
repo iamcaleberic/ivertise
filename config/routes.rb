@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :photographers
+  devise_for :muas
+  devise_for :models
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get "models/index" =>"models#index"
