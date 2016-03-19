@@ -1,19 +1,23 @@
-%h1 Listing photos
+= render 'home/menu'
+.ui.container
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+  %h1 Listing photos
 
-  %tbody
-    - @photos.each do |photo|
+  %table
+    %thead
       %tr
-        %td= link_to 'Show', photo
-        %td= link_to 'Edit', edit_photo_path(photo)
-        %td= link_to 'Destroy', photo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      =@photos
+      - @photos.each do |photo|
+        %tr
+          %td= link_to 'Show', photo
+          %td= link_to 'Edit', edit_photo_path(photo)
+          %td= link_to 'Destroy', photo, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'New Photo', new_photo_path
+  %br
+
+  -#= link_to 'New Photo', new_photo_path

@@ -1,11 +1,9 @@
 class HomeController < ApplicationController
   def index
   	@user = User.new
-  end
-
-  def upload_photo
-  	respond_to do |format|
-  		format.js
-  	end
+  	@messages = Message.all
+    if user_signed_in?
+      redirect_to photo_path(current_user.id)
+    end
   end
 end

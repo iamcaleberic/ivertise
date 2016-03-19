@@ -5,7 +5,9 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    # @photos = Photo.all
+    @user = current_user.id
+    @photos = Photo.find_by(:user_id => @user)
   end
 
   # GET /photos/1
@@ -66,7 +68,8 @@ class PhotosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
-      @photo = Photo.find(params[:id])
+      @user = User.find(params[:id])
+      @photo = @user.photo
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

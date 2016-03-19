@@ -1,41 +1,28 @@
 -if user_signed_in?
+
   / header
   .ui.fixed.white.menu{:style => "margin-bottom: 50px"}
     .ui.container
-      = image_tag("logo.png")
+      =link_to root_path do
+        = image_tag("logo.png")
       %a.header.item{:href => "#"}
       -#= link_to "Home" , root_path , :class =>"item"
+      =link_to 'Payment History', '', class: 'item'
+      =link_to 'Portfolio', '', class: 'item'
+      =link_to 'Photo Stats', '', class: 'item'
+      =link_to 'Download History', '', class: 'item'
 
       .item
         %i.large.mail.outline.icon
-      /
-        <div class="ui simple dropdown item">
-        <i class="dropdown icon"></i>
-        <div class="menu">
-        <a class="item" href="#">Link Item</a>
-        <a class="item" href="#">Link Item</a>
-        <div class="divider"></div>
-        <div class="header">Header Item</div>
-        <div class="item">
-        <i class="dropdown icon"></i>
-        Sub Menu
-        <div class="menu">
-        <a class="item" href="#">Link Item</a>
-        <a class="item" href="#">Link Item</a>
-        </div>
-        </div>
-        <a class="item" href="#">Link Item</a>
-        </div>
-        </div>
-      -#= link_to "Images" , '' , :class =>"item"
-      -#= link_to "Photographers" , '' , :class =>"item"
-      -#= link_to "MUA" , '' , :class =>"item"
-      -#= link_to "Models" , '' , :class =>"item"
+        -if @messages.nil?
+          0
+
+        -# @messages.each do |m|
 
 
     = link_to 'Upload Photos', new_photo_path, class: 'item'
     
-    = link_to 'Settings', edit_user_registration_path, method: :delete, class: 'item'
+    = link_to 'Settings', edit_user_registration_path, class: 'item'
     = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'item'
 
 -else

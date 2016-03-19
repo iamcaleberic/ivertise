@@ -5,78 +5,80 @@
     margin-top: 10%;
   }
 .top
-  .ui.form
-    .ui.container
-      / %h2 Sign up
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = devise_error_messages!
-        .field
-          .ui.four.column.grid
-            .column
-              .ui.fluid.card
-                .image
-                  =image_tag 'logo.png'
+  .ui.container
+    .ui.segment
+      .ui.form
+        .ui.container
+          / %h2 Sign up
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+            .field
+              .ui.four.column.grid
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      Image Contributor
+                      = f.radio_button :is_contributor, ''
+
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      Photographer
+                      = f.radio_button :is_photographer, ''
+
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      Model
+                      = f.radio_button :is_model, ''
+
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      Make-up Artist
+                      = f.radio_button :is_mua, ''
+
+            %hr
                 
-                .content
-                  Image Contributor
-                  = f.radio_button :is_contributor, ''
-
-            .column
-              .ui.fluid.card
-                .image
-                  =image_tag 'logo.png'
-                
-                .content
-                  Photographer
-                  = f.radio_button :is_photographer, ''
-
-            .column
-              .ui.fluid.card
-                .image
-                  =image_tag 'logo.png'
-                
-                .content
-                  Model
-                  = f.radio_button :is_model, ''
-
-            .column
-              .ui.fluid.card
-                .image
-                  =image_tag 'logo.png'
-                
-                .content
-                  Make-up Artist
-                  = f.radio_button :is_mua, ''
-
-        %hr
-            
-        .field
-          = f.label :names
-          %br/
-          = f.text_field :names, autofocus: true
-        .field
-          = f.label :email
-          %br/
-          = f.email_field :email
-        .field
-          = f.label :password
-          - if @minimum_password_length
-            %em
-              (#{@minimum_password_length} characters minimum)
-          %br/
-          = f.password_field :password, autocomplete: "off"
-        .field
-          = f.label :password_confirmation
-          %br/
-          = f.password_field :password_confirmation, autocomplete: "off"
-        .actions
-          = f.submit "Sign up", class: 'ui button'
+            .field
+              = f.label :names
+              %br/
+              = f.text_field :names, autofocus: true
+            .field
+              = f.label :email
+              %br/
+              = f.email_field :email
+            .field
+              = f.label :password
+              - if @minimum_password_length
+                %em
+                  (#{@minimum_password_length} characters minimum)
+              %br/
+              = f.password_field :password, autocomplete: "off"
+            .field
+              = f.label :password_confirmation
+              %br/
+              = f.password_field :password_confirmation, autocomplete: "off"
+            .actions
+              = f.submit "Sign up", class: 'ui button'
 
 
-      .ui.bottom.attached.warning.message
-        %i.icon.help
-        Already signed in?
-        = link_to 'Login here', new_user_session_path 
-        instead. 
+          .ui.bottom.attached.warning.message
+            %i.icon.help
+            Already signed in?
+            = link_to 'Login here', new_user_session_path 
+            instead. 
 
-      -#= render "devise/shared/links"
+          -#= render "devise/shared/links"
