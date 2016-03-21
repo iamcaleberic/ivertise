@@ -58,6 +58,10 @@
             %hr
                 
             .field#tag
+              = f.label :username
+              %br/
+              = f.text_field :username
+            .field#tag
               = f.label :names
               %br/
               = f.text_field :names, autofocus: true
