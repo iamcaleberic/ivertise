@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20160321094055) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "names"
-    t.boolean  "is_admin",               default: false
     t.boolean  "is_mua",                 default: false
     t.boolean  "is_contributor",         default: false
     t.boolean  "is_model",               default: false

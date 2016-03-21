@@ -19,15 +19,34 @@
     .ui.grid.centered
       .fifteen.wide.column
         .ui.top.attached.tabular.menu{style: "width: 100%"}
-          %a.active.item{"data-tab" => "first"} Models
+          %a.active.item{"data-tab" => "first"} All
           %a.item{"data-tab" => "second"} Make Up Artists
           %a.item{"data-tab" => "third"} Photographers
+          %a.item{"data-tab" => "four"} Models
+
         .ui.bottom.attached.tab.segment.active{"data-tab" => "first"}
-          Models
+          
+          #masonry-grid{style: 'margin-left: 8%;'}
+            -@photos.each do |p|
+              #picha
+                .ui.card
+                  .image
+                    = image_tag p.image(:medium)
+
+          :javascript
+            var $container = jQuery('#masonry-grid');
+            // initialize
+            $container.masonry({
+              columnWidth: 50,
+              itemSelector: '#picha'
+            });
+
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
           Make Up Artists
         .ui.bottom.attached.tab.segment{"data-tab" => "third"}
           Photographers
+        .ui.bottom.attached.tab.segment{"data-tab" => "four"}
+          Models
 
   = render "layouts/footer"
 

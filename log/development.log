@@ -1,0 +1,2222 @@
+  [1m[36m (144.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (129.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to DeviseCreateUsers (20160318064615)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (6.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (5.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (1.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (1.7ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160318064615"]]
+  [1m[36m (146.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddFieldsToUsers (20160318071340)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.6ms)[0m  [1mALTER TABLE "users" ADD "names" varchar[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160318071340"]]
+  [1m[36m (151.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddRolesToUser (20160318071712)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.7ms)[0m  [1mALTER TABLE "users" ADD "is_mua" boolean DEFAULT 'f'[0m
+  [1m[35m (1.3ms)[0m  ALTER TABLE "users" ADD "is_contributor" boolean DEFAULT 'f'
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "users" ADD "is_model" boolean DEFAULT 'f'[0m
+  [1m[35m (1.3ms)[0m  ALTER TABLE "users" ADD "is_photographer" boolean DEFAULT 'f'
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160318071712"]]
+  [1m[35m (112.9ms)[0m  commit transaction
+Migrating to AddAvatarsToUsers (20160318073223)
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.8ms)[0m  ALTER TABLE "users" ADD "avatar_file_name" varchar
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "users" ADD "avatar_content_type" varchar[0m
+  [1m[35m (1.0ms)[0m  ALTER TABLE "users" ADD "avatar_file_size" integer
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "users" ADD "avatar_updated_at" datetime[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160318073223"]]
+  [1m[36m (94.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePhotos (20160319012426)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "photos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160319012426"]]
+  [1m[36m (104.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserIdToPhotos (20160319012737)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.5ms)[0m  [1mALTER TABLE "photos" ADD "user_id" integer[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160319012737"]]
+  [1m[36m (134.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddImagesToPhotos (20160319012807)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.6ms)[0m  [1mALTER TABLE "photos" ADD "image_file_name" varchar[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "photos" ADD "image_content_type" varchar
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "photos" ADD "image_file_size" integer[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "photos" ADD "image_updated_at" datetime
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160319012807"]]
+  [1m[35m (143.3ms)[0m  commit transaction
+Migrating to AddFieldsToPhotos (20160319014404)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  ALTER TABLE "photos" ADD "title" varchar
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "photos" ADD "price" integer[0m
+  [1m[35m (1.0ms)[0m  ALTER TABLE "photos" ADD "description" varchar
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "photos" ADD "keywords" varchar[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160319014404"]]
+  [1m[36m (127.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMessages (20160319034638)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160319034638"]]
+  [1m[36m (129.4ms)[0m  [1mcommit transaction[0m
+Migrating to DeviseCreateAdmins (20160319163601)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")
+  [1m[36m (0.5ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "index_admins_on_reset_password_token" ON "admins" ("reset_password_token")
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160319163601"]]
+  [1m[35m (172.2ms)[0m  commit transaction
+Migrating to AddDetailsToUsers (20160321060038)
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.2ms)[0m  ALTER TABLE "users" ADD "phone" integer
+  [1m[36m (1.3ms)[0m  [1mALTER TABLE "users" ADD "country" varchar[0m
+  [1m[35m (2.4ms)[0m  ALTER TABLE "users" ADD "date_of_birth" datetime
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "users" ADD "gender" varchar[0m
+  [1m[35m (1.4ms)[0m  ALTER TABLE "users" ADD "height" integer
+  [1m[36m (1.3ms)[0m  [1mALTER TABLE "users" ADD "weight" integer[0m
+  [1m[35m (1.4ms)[0m  ALTER TABLE "users" ADD "city" varchar
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "users" ADD "bust" integer[0m
+  [1m[35m (2.0ms)[0m  ALTER TABLE "users" ADD "waist" integer
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "users" ADD "eye_color" varchar[0m
+  [1m[35m (1.2ms)[0m  ALTER TABLE "users" ADD "shoe_size" integer
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160321060038"]]
+  [1m[35m (134.2ms)[0m  commit transaction
+Migrating to AddFieldToAdmins (20160321090958)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.7ms)[0m  ALTER TABLE "admins" ADD "names" varchar
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160321090958"]]
+  [1m[35m (101.3ms)[0m  commit transaction
+Migrating to AddAttachmentAvatarToAdmins (20160321094055)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.7ms)[0m  ALTER TABLE "admins" ADD "avatar_file_name" varchar
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "admins" ADD "avatar_content_type" varchar[0m
+  [1m[35m (1.3ms)[0m  ALTER TABLE "admins" ADD "avatar_file_size" integer
+  [1m[36m (1.1ms)[0m  [1mALTER TABLE "admins" ADD "avatar_updated_at" datetime[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160321094055"]]
+  [1m[36m (94.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.5ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+
+  [1m[36m (0.6ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.9ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:09:37 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PhotosController#index as 
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 401 Unauthorized in 258ms (ActiveRecord: 5.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:09:56 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (71704.6ms)
+  Rendered layouts/_footer.html.haml (53.5ms)
+  Rendered home/index.html.haml within layouts/application (71866.4ms)
+Completed 200 OK in 74656ms (Views: 74445.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:11:14 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:11:15 +0300
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-03-21 15:11:24 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.haml within layouts/application (127.0ms)
+Completed 200 OK in 654ms (Views: 631.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:11:31 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (24.2ms)
+  Rendered layouts/_footer.html.haml (36.7ms)
+  Rendered home/index.html.haml within layouts/application (105.0ms)
+Completed 200 OK in 637ms (Views: 631.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:11:33 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (81.2ms)
+Completed 200 OK in 589ms (Views: 581.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:11:44 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"O1/aEX89lII/zp3JpXdqm2nLkXBWoBlvEWT0ZXTJ+Xwa7cxw1mO1ShcoMJ83CC7XX14PyAZtyzAS1iNlj0b44w==", "user"=>{"email"=>"fruit@info.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "fruit@info.com"]]
+Completed 401 Unauthorized in 34ms (ActiveRecord: 1.2ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"O1/aEX89lII/zp3JpXdqm2nLkXBWoBlvEWT0ZXTJ+Xwa7cxw1mO1ShcoMJ83CC7XX14PyAZtyzAS1iNlj0b44w==", "user"=>{"email"=>"fruit@info.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/sessions/new.html.haml within layouts/application (32.7ms)
+Completed 200 OK in 859ms (Views: 552.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-03-21 15:11:52 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.haml within layouts/application (62.9ms)
+Completed 200 OK in 650ms (Views: 640.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-03-21 15:12:13 +0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fodsyDGaXdi3ASLgxyeRiLCJth+42JEiwDCwsT6fTt5fNXqpmMR8EJ/nj7ZVWNXEhhwop+gVQ33DgmexxRBPQQ==", "user"=>{"names"=>"fruit", "email"=>"fruit@info.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+Unpermitted parameter: password_confirmation
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'fruit@info.com' LIMIT 1[0m
+  [1m[35mSQL (3.9ms)[0m  INSERT INTO "users" ("names", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["names", "fruit"], ["email", "fruit@info.com"], ["encrypted_password", "$2a$10$K1ykGY7YV.ja9DNlNRhPr.1.zpRbttlxIkX2CXobR3vC4Unm7U.7a"], ["created_at", "2016-03-21 12:12:14.080924"], ["updated_at", "2016-03-21 12:12:14.080924"]]
+  [1m[36m (173.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (2.4ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_sign_in_at", "2016-03-21 12:12:14.273295"], ["current_sign_in_at", "2016-03-21 12:12:14.273295"], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2016-03-21 12:12:14.278811"], ["id", 1]]
+  [1m[35m (181.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 804ms (ActiveRecord: 362.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:12:14 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 21ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:12:14 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (35.9ms)
+  [1m[36mPhoto Load (1.1ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (74.5ms)
+Completed 200 OK in 732ms (Views: 678.1ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:12:23 +0300
+Processing by PhotosController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (29.9ms)
+  Rendered photos/_form.html.haml (56.2ms)
+  Rendered photos/new.html.haml within layouts/application (109.0ms)
+Completed 200 OK in 628ms (Views: 575.8ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:12:34 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hrGhxHvzryQWoxX5L6+q7ioVc28TqwNuaFzlzwn4xN+nA7el0q2O7D5FuK+90O6iHIDt10Nm0TFr7jLP8nfFQA==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x007fbe9c7add40 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-15s4a8v.jpg>, @original_filename="DSC_0012.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"DSC_0012.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Command :: file -b --mime '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-mxohyb.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]'
+Command :: convert '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' -auto-orient -resize "600x600" '/tmp/ae1aedc408b78424cf13a488cf9ce57120160321-16132-dkb0cy'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]'
+Command :: convert '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' -auto-orient -resize "300x300>" '/tmp/ae1aedc408b78424cf13a488cf9ce57120160321-16132-c51w9e'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]'
+Command :: convert '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1droclu.jpg[0]' -auto-orient -resize "100x" -crop "100x100+0+14" +repage '/tmp/ae1aedc408b78424cf13a488cf9ce57120160321-16132-1niu6hj'
+  [1m[35m (0.5ms)[0m  begin transaction
+Command :: file -b --mime '/tmp/3f05013de778ba1a9e6b39259deb77f020160321-16132-1x0jc58.jpg'
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["image_file_name", "DSC_0012.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 3508726], ["image_updated_at", "2016-03-21 12:12:34.952815"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:12:53.126434"], ["updated_at", "2016-03-21 12:12:53.126434"]]
+  [1m[35m (107.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 18429ms (ActiveRecord: 112.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:12:53 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 14ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:12:53 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (15.1ms)
+  [1m[36mPhoto Load (0.7ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (38.3ms)
+Completed 200 OK in 668ms (Views: 654.2ms | ActiveRecord: 1.5ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-03-21 15:12:59 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"2pGLsBnZX8b8qx3s1H/YkhmoP9mc6jdanazxJkMV3kr7I53RsId+DtRNsLpGAJzeLz2hYcwn5QWeHiYmuJrf1Q=="}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 271ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:12:59 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (13.7ms)
+  Rendered layouts/_footer.html.haml (4.2ms)
+  Rendered home/index.html.haml within layouts/application (26.7ms)
+Completed 200 OK in 626ms (Views: 620.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:13:01 +0300
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:13:04 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (32.6ms)
+Completed 200 OK in 516ms (Views: 507.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:13:21 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rw4/xQniJRhjjKSsAEf9/5Di7lBae19RGigstApo6G9sD82Ce+aDLLgNM58sVP9oL4pYTOl/zMyayWdZigH06Q==", "user"=>{"email"=>"fruit@info.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "fruit@info.com"]]
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (1.8ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2016-03-21 12:13:21.716382"], ["sign_in_count", 2], ["updated_at", "2016-03-21 12:13:21.721352"], ["id", 1]]
+  [1m[35m (120.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 432ms (ActiveRecord: 122.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:13:21 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 31ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:13:22 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (12.1ms)
+  [1m[36mPhoto Load (0.5ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (31.5ms)
+Completed 200 OK in 639ms (Views: 626.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:13:26 +0300
+Processing by PhotosController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (10.9ms)
+  Rendered photos/_form.html.haml (19.0ms)
+  Rendered photos/new.html.haml within layouts/application (42.8ms)
+Completed 200 OK in 582ms (Views: 566.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:13:26 +0300
+Processing by PhotosController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (10.6ms)
+  Rendered photos/_form.html.haml (17.1ms)
+  Rendered photos/new.html.haml within layouts/application (35.1ms)
+Completed 200 OK in 514ms (Views: 504.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:13:38 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ErTWYn15//SyOeNDLj3+dZ8M25bK4Zep1AFw5n3CP4DM2xZR24oYOcM6pYAQz4lXFcTRXizP7OiyTab6oEfXqw==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x00000004734a48 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-1o26k43.jpg>, @original_filename="DSC_0111.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"DSC_0111.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Command :: file -b --mime '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-d32up0.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]'
+Command :: convert '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' -auto-orient -resize "600x600" '/tmp/9417f43582cf9fed4369f27c6645178320160321-16132-144r1jc'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]'
+Command :: convert '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' -auto-orient -resize "300x300>" '/tmp/9417f43582cf9fed4369f27c6645178320160321-16132-zzixqj'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]'
+Command :: convert '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-ybv5de.jpg[0]' -auto-orient -resize "x100" -crop "100x100+26+0" +repage '/tmp/9417f43582cf9fed4369f27c6645178320160321-16132-ewou3d'
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/34b0add02f70c4902a1f51fcbda4022620160321-16132-14nxf47.jpg'
+  [1m[35mSQL (2.1ms)[0m  INSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["image_file_name", "DSC_0111.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 3244283], ["image_updated_at", "2016-03-21 12:13:38.648586"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:13:51.210372"], ["updated_at", "2016-03-21 12:13:51.210372"]]
+  [1m[36m (151.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 12922ms (ActiveRecord: 154.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:13:51 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 30ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:13:51 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (22.8ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (47.0ms)
+Completed 200 OK in 678ms (Views: 667.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:13:57 +0300
+Processing by PhotosController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (13.3ms)
+  Rendered photos/_form.html.haml (20.5ms)
+  Rendered photos/new.html.haml within layouts/application (42.8ms)
+Completed 200 OK in 538ms (Views: 528.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:14:08 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"08ROkPvtocGUsfZ8mkOcbLBuVtVHf4JGJoYYuh6sLLQNq46jXR5GDOWysL+ksetOOqZcHaFR+QdAys6mwynEnw==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x007fbec7304250 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-e45f5q.jpg>, @original_filename="DSC_0175.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"DSC_0175.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Command :: file -b --mime '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-ac1tzc.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]'
+Command :: convert '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' -auto-orient -resize "600x600" '/tmp/99e14f4f276eae5542c73858708b467720160321-16132-li7f66'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]'
+Command :: convert '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' -auto-orient -resize "300x300>" '/tmp/99e14f4f276eae5542c73858708b467720160321-16132-iyn1b4'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]'
+Command :: convert '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-18zr710.jpg[0]' -auto-orient -resize "100x" -crop "100x100+0+0" +repage '/tmp/99e14f4f276eae5542c73858708b467720160321-16132-eue3jy'
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/1484b9cd02e82349ab6f6a7d0d15542a20160321-16132-hax3sa.jpg'
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["image_file_name", "DSC_0175.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 2904894], ["image_updated_at", "2016-03-21 12:14:09.034608"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:14:19.441986"], ["updated_at", "2016-03-21 12:14:19.441986"]]
+  [1m[36m (170.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10715ms (ActiveRecord: 173.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:14:19 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 13ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:14:20 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.3ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (36.0ms)
+Completed 200 OK in 650ms (Views: 639.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:14:25 +0300
+Processing by PhotosController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.0ms)
+  Rendered photos/_form.html.haml (17.6ms)
+  Rendered photos/new.html.haml within layouts/application (36.2ms)
+Completed 200 OK in 524ms (Views: 506.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:14:46 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cNCRZo1ZsZ5eglrdnJjLFlI5xmVm/Wtz0vQe61JkBNeuv1FVK6pWUy+BHB6iarw02PHMrYDTEDK0uMj3j+Hs/A==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x00000004379688 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-15w48pr.jpg>, @original_filename="DSC_0308.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"DSC_0308.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Command :: file -b --mime '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-a7lmh9.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]'
+Command :: convert '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' -auto-orient -resize "600x600" '/tmp/25b99b086ffb6a636391647424d4787d20160321-16132-18mh0zl'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]'
+Command :: convert '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' -auto-orient -resize "300x300>" '/tmp/25b99b086ffb6a636391647424d4787d20160321-16132-muafpb'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]'
+Command :: convert '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-l43lxd.jpg[0]' -auto-orient -resize "x100" -crop "100x100+15+0" +repage '/tmp/25b99b086ffb6a636391647424d4787d20160321-16132-1mi8rec'
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/37ac1d2e5649776afc5c67e739e92c2320160321-16132-4zxj41.jpg'
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["image_file_name", "DSC_0308.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 4115452], ["image_updated_at", "2016-03-21 12:14:46.618219"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:15:02.850798"], ["updated_at", "2016-03-21 12:15:02.850798"]]
+  [1m[36m (152.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 16560ms (ActiveRecord: 154.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:15:03 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 16ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:15:03 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (25.0ms)
+  [1m[35mPhoto Load (0.7ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (71.7ms)
+Completed 200 OK in 702ms (Views: 690.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:15:10 +0300
+Processing by PhotosController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.1ms)
+  Rendered photos/_form.html.haml (18.2ms)
+  Rendered photos/new.html.haml within layouts/application (37.7ms)
+Completed 200 OK in 607ms (Views: 594.5ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:15:31 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CH5VmCcBgt7Qx0o7Zo2LjzUZDPEDxsFLYxJoVl0YoITWEZWrgfJlE6HEDPhYf/ytv9EGOeXougoFXr5KgJ1Irw==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x007fbec72f0de0 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-19zdqj1.jpg>, @original_filename="picc.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"picc.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Command :: file -b --mime '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-wka27f.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]'
+Command :: convert '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' -auto-orient -resize "600x600" '/tmp/44c20ac07b2a5a26db9a589478e5ff5a20160321-16132-malxdh'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]'
+Command :: convert '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' -auto-orient -resize "300x300>" '/tmp/44c20ac07b2a5a26db9a589478e5ff5a20160321-16132-eiqap1'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]'
+Command :: convert '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1llzip9.jpg[0]' -auto-orient -resize "x100" -crop "100x100+6+0" +repage '/tmp/44c20ac07b2a5a26db9a589478e5ff5a20160321-16132-hr468v'
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/3ea44bd36d49e8f4a55f544f4340d04c20160321-16132-1lhg4dq.jpg'
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["image_file_name", "picc.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 2360829], ["image_updated_at", "2016-03-21 12:15:31.476896"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:15:42.304768"], ["updated_at", "2016-03-21 12:15:42.304768"]]
+  [1m[36m (133.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11152ms (ActiveRecord: 137.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:15:42 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 12ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:15:42 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.7ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (41.0ms)
+Completed 200 OK in 645ms (Views: 634.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2016-03-21 15:16:24 +0300
+Processing by PhotosController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.7ms)
+  Rendered photos/_form.html.haml (19.5ms)
+  Rendered photos/new.html.haml within layouts/application (39.6ms)
+Completed 200 OK in 769ms (Views: 759.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/photos" for 127.0.0.1 at 2016-03-21 15:16:38 +0300
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hRwGUvuNgFQbhGLVJ7Lu2GPWaQfXPlE6l9hVSKZjMjFbc8ZhXX5nmWqHJBYZQJn66R5jzzEQKnvxlINUe+baGg==", "photo"=>{"title"=>"", "price"=>"", "image"=>#<ActionDispatch::Http::UploadedFile:0x007fbec537f600 @tempfile=#<Tempfile:/tmp/RackMultipart20160321-16132-4ir50v.png>, @original_filename="logo.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"logo.png\"\r\nContent-Type: image/png\r\n">, "description"=>"", "keywords"=>"", "user_id"=>"1"}, "commit"=>"Upload"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Command :: file -b --mime '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-ihoz22.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]'
+Command :: convert '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' -auto-orient -resize "600x600" '/tmp/82a0d87c6d1080dbcbdf5f641d0765a020160321-16132-tpcoc0'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]'
+Command :: convert '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' -auto-orient -resize "300x300>" '/tmp/82a0d87c6d1080dbcbdf5f641d0765a020160321-16132-xybifh'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]'
+Command :: convert '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-5wyd2s.png[0]' -auto-orient -resize "x100" -crop "100x100+134+0" +repage '/tmp/82a0d87c6d1080dbcbdf5f641d0765a020160321-16132-6s9kis'
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/96d6f2e7e1f705ab5e59c84a6dc009b220160321-16132-1v170no.png'
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "user_id", "title", "description", "keywords", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["image_file_name", "logo.png"], ["image_content_type", "image/png"], ["image_file_size", 4720], ["image_updated_at", "2016-03-21 12:16:38.139362"], ["user_id", 1], ["title", ""], ["description", ""], ["keywords", ""], ["created_at", "2016-03-21 12:16:39.420546"], ["updated_at", "2016-03-21 12:16:39.420546"]]
+  [1m[36m (117.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 1570ms (ActiveRecord: 119.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:16:39 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 13ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:16:39 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.6ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (50.3ms)
+Completed 200 OK in 631ms (Views: 617.4ms | ActiveRecord: 1.2ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-03-21 15:16:52 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"8XwYgA5450c85AqEoPnX5VOs0RSzS9ApN1oxv2AfGXsvE9izqIsAik3nTEeeC6DH2WTb3FVlq2hRFuejvZrxUA=="}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 31ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:16:52 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (13.7ms)
+  Rendered layouts/_footer.html.haml (4.1ms)
+  Rendered home/index.html.haml within layouts/application (32.6ms)
+Completed 200 OK in 615ms (Views: 609.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:16:54 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:17:00 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (11.2ms)
+  Rendered layouts/_footer.html.haml (4.1ms)
+  Rendered home/index.html.haml within layouts/application (24.4ms)
+Completed 200 OK in 507ms (Views: 496.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:17:01 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (16.3ms)
+  Rendered layouts/_footer.html.haml (3.7ms)
+  Rendered home/index.html.haml within layouts/application (29.0ms)
+Completed 200 OK in 523ms (Views: 516.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:18:08 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (38.5ms)
+  Rendered layouts/_footer.html.haml (8.9ms)
+  Rendered home/index.html.haml within layouts/application (63.0ms)
+Completed 200 OK in 661ms (Views: 655.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:18:09 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:18:09 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:09 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:10 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:18:11 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:18:13 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:18:13 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:18:14 +0300
+
+
+Started GET "/home/images" for 127.0.0.1 at 2016-03-21 15:18:18 +0300
+Processing by HomeController#images as HTML
+  Rendered layouts/_pheader.html.haml (14.0ms)
+  Rendered home/images.html.haml within layouts/application (35.4ms)
+Completed 200 OK in 518ms (Views: 514.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/semantic-ui/icons-aadc3580d2b64ff5a7e6f1425587db4e8b033efcbf8f5c332ca52a5ed580c87c.woff2" for 127.0.0.1 at 2016-03-21 15:18:19 +0300
+
+
+Started GET "/home/photographers" for 127.0.0.1 at 2016-03-21 15:19:00 +0300
+Processing by HomeController#photographers as HTML
+  Rendered layouts/_pheader.html.haml (4.8ms)
+  Rendered home/photographers.html.haml within layouts/application (22.5ms)
+Completed 200 OK in 478ms (Views: 474.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/muas" for 127.0.0.1 at 2016-03-21 15:19:06 +0300
+Processing by HomeController#muas as HTML
+  Rendered layouts/_pheader.html.haml (4.9ms)
+  Rendered home/muas.html.haml within layouts/application (23.7ms)
+Completed 200 OK in 468ms (Views: 464.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/images" for 127.0.0.1 at 2016-03-21 15:19:08 +0300
+Processing by HomeController#images as HTML
+  Rendered layouts/_pheader.html.haml (4.2ms)
+  Rendered home/images.html.haml within layouts/application (13.7ms)
+Completed 200 OK in 477ms (Views: 474.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/images" for 127.0.0.1 at 2016-03-21 15:19:15 +0300
+Processing by HomeController#images as HTML
+  Rendered layouts/_pheader.html.haml (10.2ms)
+  Rendered home/images.html.haml within layouts/application (22.3ms)
+Completed 200 OK in 538ms (Views: 533.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:19:20 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (9.7ms)
+  Rendered layouts/_footer.html.haml (7.1ms)
+  Rendered home/index.html.haml within layouts/application (35.7ms)
+Completed 200 OK in 692ms (Views: 677.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:19:21 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (8.8ms)
+  Rendered layouts/_footer.html.haml (3.5ms)
+  Rendered home/index.html.haml within layouts/application (20.1ms)
+Completed 200 OK in 591ms (Views: 585.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:19:22 +0300
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:19:49 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (34.3ms)
+Completed 200 OK in 535ms (Views: 528.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:20:02 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WH7TJ/KU2T4uMCSjOtnkCTigINTB7jDivpxqgMDBPAv5mh78xSMzxt9fXh9HYTV6ChURylnKfi3cdAw6Ou4z9A==", "user"=>{"email"=>"fruit@info.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "fruit@info.com"]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2016-03-21 12:13:21.716382"], ["current_sign_in_at", "2016-03-21 12:20:02.993385"], ["sign_in_count", 3], ["updated_at", "2016-03-21 12:20:02.997993"], ["id", 1]]
+  [1m[36m (133.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 429ms (ActiveRecord: 134.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:20:03 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 17ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:20:03 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (17.7ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (54.3ms)
+Completed 200 OK in 611ms (Views: 599.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:20:19 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (10.5ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (54.1ms)
+Completed 200 OK in 879ms (Views: 867.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:20:20 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:20:20 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:20:20 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:20 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:21 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:20:22 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:20:30 +0300
+
+
+Started GET "/assets/semantic-ui/icons-aadc3580d2b64ff5a7e6f1425587db4e8b033efcbf8f5c332ca52a5ed580c87c.woff2" for 127.0.0.1 at 2016-03-21 15:20:30 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:20:38 +0300
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:20:50 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (11.2ms)
+  [1m[35mPhoto Load (0.9ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (46.0ms)
+Completed 200 OK in 614ms (Views: 598.9ms | ActiveRecord: 1.4ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-03-21 15:21:05 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UjjY2bbH7X0gy8+/uvgERF1/v+alNkkwv75aUQLZYs8JggODAfF6r0WA0BaRF2Sq1Wi9UVm+yaIqTK5kEv6lhg=="}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 33ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:21:05 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (18.1ms)
+  Rendered layouts/_footer.html.haml (4.0ms)
+  Rendered home/index.html.haml within layouts/application (33.7ms)
+Completed 200 OK in 628ms (Views: 622.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:21:06 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:22:19 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (10.8ms)
+  Rendered layouts/_footer.html.haml (10.5ms)
+  Rendered home/index.html.haml within layouts/application (62.7ms)
+Completed 200 OK in 641ms (Views: 632.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:20 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:20 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:21 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:22 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:22:24 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:22:24 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:22:25 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:22:43 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (11.3ms)
+  Rendered layouts/_footer.html.haml (3.5ms)
+  Rendered home/index.html.haml within layouts/application (68.6ms)
+Completed 200 OK in 642ms (Views: 637.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:45 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:22:46 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:22:48 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:22:48 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:22:49 +0300
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:23:01 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (32.5ms)
+Completed 200 OK in 530ms (Views: 520.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/semantic-ui/icons-aadc3580d2b64ff5a7e6f1425587db4e8b033efcbf8f5c332ca52a5ed580c87c.woff2" for 127.0.0.1 at 2016-03-21 15:23:02 +0300
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-21 15:23:12 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dGtN9YvtUznMK1WLu4EhjUqpmUyK825C4IyW8ECQpA3BRFsQ0kuemLcy9VP2R326rdtnh1bte8tvKlQa32jrTA==", "user"=>{"email"=>"fruit@info.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "fruit@info.com"]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.8ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2016-03-21 12:20:02.993385"], ["current_sign_in_at", "2016-03-21 12:23:13.046911"], ["sign_in_count", 4], ["updated_at", "2016-03-21 12:23:13.052355"], ["id", 1]]
+  [1m[36m (137.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 412ms (ActiveRecord: 140.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:23:13 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 28ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:23:13 +0300
+Processing by PhotosController#index as 
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered home/_menu.html.haml (12.3ms)
+  [1m[35mPhoto Load (0.6ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (54.5ms)
+Completed 200 OK in 678ms (Views: 658.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2016-03-21 15:23:18 +0300
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_menu.html.haml (23.7ms)
+  Rendered devise/registrations/edit.html.haml within layouts/application (90.7ms)
+Completed 200 OK in 578ms (Views: 568.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/images/thumb/missing.png" for 127.0.0.1 at 2016-03-21 15:23:19 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/thumb/missing.png"):
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.2) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.2) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (7.8ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (21.6ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (22.4ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (6.5ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (332.9ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (2.1ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (4.7ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (10.7ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (4.2ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (150.8ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.4ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.8ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (237.6ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2016-03-21 15:24:05 +0300
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mUser Load (4.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (36.1ms)
+  Rendered devise/registrations/edit.html.haml within layouts/application (124.3ms)
+Completed 200 OK in 737ms (Views: 719.9ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:07 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:08 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+
+Started GET "/images/thumb/missing.png" for 127.0.0.1 at 2016-03-21 15:24:09 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/thumb/missing.png"):
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.2) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.2) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.2) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/ninja/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (9.5ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (21.0ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (12.0ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (14.0ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (237.3ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (3.4ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (4.2ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (3.9ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (1.5ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (82.4ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.6ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (2.1ms)
+  Rendered /home/ninja/.rvm/gems/ruby-2.1.2/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (181.8ms)
+
+
+Started GET "/assets/semantic-ui/icons-aadc3580d2b64ff5a7e6f1425587db4e8b033efcbf8f5c332ca52a5ed580c87c.woff2" for 127.0.0.1 at 2016-03-21 15:24:10 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:24:10 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:24:11 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:24:28 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Redirected to http://localhost:3000/photos.1
+Completed 302 Found in 22ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:24:29 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (9.9ms)
+  [1m[36mPhoto Load (0.6ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (39.8ms)
+Completed 200 OK in 500ms (Views: 491.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:24:32 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (16.3ms)
+  [1m[36mPhoto Load (1.2ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (55.6ms)
+Completed 200 OK in 645ms (Views: 619.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/photos.1" for 127.0.0.1 at 2016-03-21 15:24:41 +0300
+Processing by PhotosController#index as 
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered home/_menu.html.haml (18.0ms)
+  [1m[36mPhoto Load (1.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered photos/index.html.haml within layouts/application (74.7ms)
+Completed 200 OK in 648ms (Views: 631.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:31:13 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (12.5ms)
+  Rendered layouts/_footer.html.haml (4.0ms)
+  Rendered home/index.html.haml within layouts/application (25.4ms)
+Completed 200 OK in 640ms (Views: 634.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:14 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:31:15 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:31:18 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:31:18 +0300
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-03-21 15:31:21 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"XgOvzhnm9aZfNS3n1N/5sGs9Uz+2z6C7RHT5jjxjq/+kl2VIRsQ8gTaJktmuGIt+zdvEGN4r6LGou3g43kokYA=="}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 43ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:31:21 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (15.7ms)
+  Rendered layouts/_footer.html.haml (4.4ms)
+  Rendered home/index.html.haml within layouts/application (29.5ms)
+Completed 200 OK in 696ms (Views: 690.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:31:23 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:33:24 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (12.1ms)
+  Rendered layouts/_footer.html.haml (4.7ms)
+  Rendered home/index.html.haml within layouts/application (61.5ms)
+Completed 200 OK in 912ms (Views: 688.6ms | ActiveRecord: 7.9ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:27 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:28 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:33:29 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:33:30 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:33:30 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:33:31 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:39:08 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (12.9ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "photos"[0m
+  Rendered layouts/_footer.html.haml (3.5ms)
+  Rendered home/index.html.haml within layouts/application (85.1ms)
+Completed 200 OK in 681ms (Views: 673.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:09 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:10 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:39:11 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:39:12 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:39:13 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:40:32 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (12.2ms)
+  [1m[35mPhoto Load (1.2ms)[0m  SELECT "photos".* FROM "photos"
+  Rendered layouts/_footer.html.haml (4.5ms)
+  Rendered home/index.html.haml within layouts/application (149.5ms)
+Completed 200 OK in 793ms (Views: 780.4ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:33 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:33 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:33 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:33 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:34 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:35 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:40:36 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:40:36 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:40:38 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:40:49 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (10.3ms)
+  [1m[36mPhoto Load (1.0ms)[0m  [1mSELECT "photos".* FROM "photos"[0m
+  Rendered layouts/_footer.html.haml (5.2ms)
+  Rendered home/index.html.haml within layouts/application (111.3ms)
+Completed 200 OK in 738ms (Views: 730.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/home.self-48205962d95372ae0ecbd62205a3b16ccfe754022ead6dfd4ae4530adc5edd87.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:50 +0300
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/api.self-9a054b3d26d122a0c07120b617911d2003f2527675f49e3f4a6034cee7749596.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/colorize.self-38d1525d15c99eed1d6a51a0e4672e3a76fda8739444081a116dce31eab5fbd4.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/embed.self-5023f5eee5d1d676bbf69e8057191ce1518548cf1e5ef16ee46e192ddde89fe2.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/form.self-b3960c56b87b64f4f2a1a18ffdb99251e58317b41c7cbf166c10f6b96a62bb44.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/state.self-b9dded6fa892e116b1f452aef0e7bbbfec6ece95bee3fed65a3e8cae0db870d5.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/visibility.self-34dff51c9a9eaf612c9389acb9c6da0acf207a646de6d1ab1d364ff59e982efc.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/visit.self-25f014e441ca2211e3ecd71e8f2521aa4c36bfb4be976f5d414d2988fb2cb54d.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/site.self-7400f8775a9f35a6c759d4a174f7a4e5d11b4078fb3b8ae706735650bbc2406f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/accordion.self-5069d2c48b67c42333d74507854ee3d562ca915ba31a5064e5412d1b2d1bb42f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/checkbox.self-e8ad79c85ab103552fe41217774cc5fae456304e84670f8c7c17de14ef4fd340.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/dimmer.self-9d496ecb5f8029f47fe0d7ffc594e30b67cc5d4713c59d67090e6f94460848e6.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/dropdown.self-a4279d1bbc3bd723288618f8c2e117b3f0b7d009d819f4ad4ab23e4853f64fe1.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/modal.self-7d71a745bbcb21e2c2cee8f97a3e969f34bf5eaeafd43a7ae47c719463ebe044.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:51 +0300
+
+
+Started GET "/assets/semantic-ui/nag.self-7ff56a96079345898fdbbfc64bba769340e00b18cda9868c9f8b76d834617764.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/popup.self-566d37031c444cb83cd7697f6039b0c590abc33fb9e6808602288a0d4c1f9b31.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/progress.self-7e1e84a48684534003d1a4afd11152b0d7893c252f47b37a0b382f9d1c8cb05a.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/rating.self-6af7f42a078a584ab52d559f1cf91eb0cae9b899317f87518acaf344034e2c7f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/search.self-408a4c1f31b7ae544382dd97f658a4ac6f4ac6da5d215cb3298d029ba0630be1.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/shape.self-4473a25dc8678f3c387c347d8e9e5fe2c3f04029175b6e00bf69be9e929fb317.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/sidebar.self-d9c121d30016e6838b7e235712f95993578a69099bdf2c4385c8f7a70ce0eb3a.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/sticky.self-96bf4a606adcee8c15fb8c50e86508f6a34cab1ab10bb7c1712ea73da39a89ac.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/tab.self-5c5cec505d4abb54eb3dfd51afdb03ba257572e23b746b2d8813f2674e7fdde7.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/transition.self-e0a5cf604f2537cf75fd0fc43f51af5f21420d614312b69787fd1abf568c06f6.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui/video.self-11705175a979dac0b96b76b658123b336468f98009521dc9c7df31d18d994e08.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/semantic-ui.self-49cb2d2ab1323ea968a401fbd24a20d2b51aa1879c735f4b16f487797c9fa81f.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-03-21 15:40:52 +0300
+
+
+Started GET "/assets/logo-46a2767d43117117716f951663acc6b1693e2d7db16c4115a11925ec623fde7d.png" for 127.0.0.1 at 2016-03-21 15:40:53 +0300
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:40:53 +0300
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 15:40:54 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 15:40:58 +0300
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (20.0ms)
+  [1m[35mPhoto Load (1.2ms)[0m  SELECT "photos".* FROM "photos"
+  Rendered layouts/_footer.html.haml (6.6ms)
+  Rendered home/index.html.haml within layouts/application (81.0ms)
+Completed 200 OK in 796ms (Views: 788.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 15:41:00 +0300
