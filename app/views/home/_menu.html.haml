@@ -8,14 +8,15 @@
       %a.header.item{:href => "#"}
       -#= link_to "Home" , root_path , :class =>"item"
       =link_to 'Payment History', '', class: 'item'
-      =link_to 'Portfolio', '', class: 'item'
+      / =link_to 'Portfolio', '', class: 'item'
       =link_to 'Photo Stats', '', class: 'item'
       =link_to 'Download History', '', class: 'item'
 
       .item
-        %i.large.mail.outline.icon
-        -if @messages.nil?
-          0
+        = link_to messages_path do
+          %i.large.mail.outline.icon
+          -if @messages.nil?
+            0
 
         -# @messages.each do |m|
 

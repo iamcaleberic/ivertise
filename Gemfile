@@ -34,3 +34,8 @@ gem 'semantic-ui-sass'
 
 gem 'haml-rails', '~> 0.9.0'
 gem "erb2haml", :group => :development
+
+# gem 'will-paginate'
+# gem 'public-activity'
+# gem 'site-map-generator'
+# gem 'sweet-alert'

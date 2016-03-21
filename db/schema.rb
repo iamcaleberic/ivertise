@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319163601) do
+ActiveRecord::Schema.define(version: 20160321060038) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 20160319163601) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "phone"
+    t.string   "country"
+    t.datetime "date_of_birth"
+    t.string   "gender"
+    t.integer  "height"
+    t.integer  "weight"
+    t.string   "city"
+    t.integer  "bust"
+    t.integer  "waist"
+    t.string   "eye_color"
+    t.integer  "shoe_size"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

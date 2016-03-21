@@ -1,11 +1,16 @@
-= render 'layouts/menu'
+.ui.container
+  %i.large.home.icon
+  =link_to "Home", root_path, class: 'item'
 
 :css
   .top{
-    margin-top: 10%;
+    margin-top: 2%;
   }
 .top
   .ui.container
+    #image{align: "center"}
+      =image_tag('logo.png')
+
     .ui.segment
       .ui.form
         .ui.container
@@ -20,7 +25,7 @@
                       =image_tag 'logo.png'
                     
                     .content
-                      Image Contributor
+                      %p{style: 'float: right'} Image Contributor
                       = f.radio_button :is_contributor, ''
 
                 .column
@@ -29,7 +34,7 @@
                       =image_tag 'logo.png'
                     
                     .content
-                      Photographer
+                      %p{style: 'float: right'} Photographer
                       = f.radio_button :is_photographer, ''
 
                 .column
@@ -38,7 +43,7 @@
                       =image_tag 'logo.png'
                     
                     .content
-                      Model
+                      %p{style: 'float: right'} Model
                       = f.radio_button :is_model, ''
 
                 .column
@@ -47,27 +52,27 @@
                       =image_tag 'logo.png'
                     
                     .content
-                      Make-up Artist
+                      %p{style: 'float: right'} Make-up Artist
                       = f.radio_button :is_mua, ''
 
             %hr
                 
-            .field
+            .field#tag
               = f.label :names
               %br/
               = f.text_field :names, autofocus: true
-            .field
+            .field#tag
               = f.label :email
               %br/
               = f.email_field :email
-            .field
+            .field#tag
               = f.label :password
               - if @minimum_password_length
                 %em
                   (#{@minimum_password_length} characters minimum)
               %br/
               = f.password_field :password, autocomplete: "off"
-            .field
+            .field#tag
               = f.label :password_confirmation
               %br/
               = f.password_field :password_confirmation, autocomplete: "off"
@@ -82,3 +87,8 @@
             instead. 
 
           -#= render "devise/shared/links"
+
+:javascript
+  $(function(){
+    $('.field#tag').hide();
+  });

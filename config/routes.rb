@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'static/contact_us'
+
+  get 'static/terms_and_conditions'
+
+  get 'static/privacy_policy'
+
   devise_for :admins
   resources :messages
   resources :photos
@@ -6,6 +12,10 @@ Rails.application.routes.draw do
 
   resources :photos
   root 'home#index'
+
+  get 'contact_us' => 'static#contact_us', as: :contact
+  get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms
+  get 'privacy_policy' => 'static#privacy_policy', as: :privacy
 
 
   # The priority is based upon order of creation: first created -> highest priority.

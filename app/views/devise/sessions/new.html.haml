@@ -1,11 +1,17 @@
-= render 'layouts/menu'
+.ui.container
+  %i.large.home.icon
+  =link_to 'Home', root_path, class: 'item'
+
 :css
   .top{
-    margin-top: 10%;
+    margin-top: 2%;
   }
 .top
   .ui.grid.centered
     .five.wide.column
+      #image{align: "center"}
+        =image_tag('logo.png')
+      
       .ui.segment
         .ui.form
           .ui.container
@@ -25,4 +31,7 @@
                   = f.label :remember_me
               .actions
                 = f.submit "Log in", class: 'ui green button'
+            %br/
+            Don't have an account?
+            = link_to "create account", new_user_registration_path
             -#= render "devise/shared/links"

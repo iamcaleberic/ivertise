@@ -23,9 +23,14 @@
       <a class="item" href="#">Link Item</a>
       </div>
       </div>
-    = link_to "Images" , '' , :class =>"item"
-    = link_to "Photographers" , '' , :class =>"item"
-    = link_to "MUA" , '' , :class =>"item"
-    = link_to "Models" , '' , :class =>"item"
+    = link_to '' , :class =>"item" do
+      Images
+    = link_to '' , :class =>"item" do
+      Photographers
+    = link_to '' , :class =>"item" do
+      MUA
+    = link_to '' , :class =>"item" do
+      Models
+
   = link_to 'Register', new_user_registration_path, class: 'item'
   = link_to 'Login', new_user_session_path, class: 'item'

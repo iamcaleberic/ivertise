@@ -9,23 +9,30 @@
       #search.ui.action.input
         %input{:placeholder => "Search Images , Models ...", :type => "text"}/
         %select.ui.compact.selection.dropdown
-          %option{:value => "all"} All
-          %option{:selected => "selected", :value => "articles"} Images
+          %option{:selected => "all"} All
+          %option{:value => "selected", :value => "articles"} Images
           %option{:value => "products"} Models
           %option{:value => "products"} MUA
         .ui.button{:type => "submit"} Search
   / end
-  .ui.top.attached.tabular.menu
-    %a.item.active{"data-tab" => "first"} First
-    %a.item{"data-tab" => "second"} Second
-    %a.item{"data-tab" => "third"} Third
-  .ui.bottom.attached.tab.segment.active{"data-tab" => "first"}
-    First
-  .ui.bottom.attached.tab.segment{"data-tab" => "second"}
-    Second
-  .ui.bottom.attached.tab.segment{"data-tab" => "third"}
-    Third
+  .ui.container{style: 'margin-top: 1em;'}
+    .ui.grid.centered
+      .fifteen.wide.column
+        .ui.top.attached.tabular.menu{style: "width: 100%"}
+          %a.active.item{"data-tab" => "first"} Models
+          %a.item{"data-tab" => "second"} Make Up Artists
+          %a.item{"data-tab" => "third"} Photographers
+        .ui.bottom.attached.tab.segment.active{"data-tab" => "first"}
+          Models
+        .ui.bottom.attached.tab.segment{"data-tab" => "second"}
+          Make Up Artists
+        .ui.bottom.attached.tab.segment{"data-tab" => "third"}
+          Photographers
+
   = render "layouts/footer"
 
-
-  
+  :javascript
+    $(document).ready(function(){
+      $('.tabular.menu .item').tab();
+    });
+    $('.menu .item').tab();

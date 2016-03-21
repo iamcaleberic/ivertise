@@ -2,6 +2,8 @@
 .ui.container
 
   %h1 Listing photos
+  Image Count, 
+  =@pic.count
 
   %table
     %thead
@@ -11,8 +13,9 @@
         %th
 
     %tbody
-      =@photos
-      - @photos.each do |photo|
+      -#= @user
+      -#= @pic.count
+      - @pic.each do |photo|
         %tr
           %td= link_to 'Show', photo
           %td= link_to 'Edit', edit_photo_path(photo)
