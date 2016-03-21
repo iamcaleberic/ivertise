@@ -6,8 +6,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-
+    
     %script{:src => "https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"}
+    = favicon_link_tag "favicon.ico"
     
     :css
       body{
