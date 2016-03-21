@@ -34019,3 +34019,119 @@ Completed 200 OK in 650ms (Views: 643.4ms | ActiveRecord: 0.0ms)
 
 
 Started GET "/assets/semantic-ui/icons-aadc3580d2b64ff5a7e6f1425587db4e8b033efcbf8f5c332ca52a5ed580c87c.woff2" for 127.0.0.1 at 2016-03-21 11:13:25 +0300
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 08:28:42 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (42981.2ms)
+  Rendered layouts/_footer.html.haml (9.4ms)
+  Rendered home/index.html.haml within layouts/application (43249.5ms)
+Completed 200 OK in 46220ms (Views: 45732.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/home.self-87fa314b467428381d1a2c1281dbaf803fbd2756cebb4271249dd73b158c3165.css?body=1" for 127.0.0.1 at 2016-03-21 08:29:46 +0000
+
+
+Started GET "/assets/static.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 08:29:46 +0000
+
+
+Started GET "/assets/photos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 08:29:46 +0000
+
+
+Started GET "/assets/messages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-21 08:29:46 +0000
+
+
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 08:29:54 +0000
+
+
+Started GET "/assets/static.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 08:29:54 +0000
+
+
+Started GET "/assets/photos.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-21 08:29:55 +0000
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 08:30:16 +0000
+
+
+Started GET "/assets/favicon-bac63d1bc31cc287c47a7281e3fb28b27b1f1b71732fc9685a516346be5b6cae.ico" for 127.0.0.1 at 2016-03-21 08:30:20 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 08:37:20 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (1067.3ms)
+  Rendered layouts/_footer.html.haml (21.2ms)
+  Rendered home/index.html.haml within layouts/application (1142.9ms)
+Completed 200 OK in 2133ms (Views: 1935.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 08:37:27 +0000
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 08:37:47 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (243.3ms)
+Completed 200 OK in 444ms (Views: 421.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-21 08:37:52 +0000
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Goo6RStCLhnOePkGWQDBI6F7zIWWNjAnd6iLGX2rFOfTiHo5AZriMMS0x+wvqBi0NgZUTu/FU6pqFkZuwzivbw==", "user"=>{"email"=>"dark@prince.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "dark@prince.com"]]
+Completed 401 Unauthorized in 302ms (ActiveRecord: 0.5ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Goo6RStCLhnOePkGWQDBI6F7zIWWNjAnd6iLGX2rFOfTiHo5AZriMMS0x+wvqBi0NgZUTu/FU6pqFkZuwzivbw==", "user"=>{"email"=>"dark@prince.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/sessions/new.html.haml within layouts/application (16.1ms)
+Completed 200 OK in 455ms (Views: 242.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-21 08:38:25 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/application (23.6ms)
+Completed 200 OK in 254ms (Views: 250.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 08:38:31 +0000
+Processing by HomeController#index as HTML
+  Rendered layouts/_menu.html.haml (16.5ms)
+  Rendered layouts/_footer.html.haml (12.2ms)
+  Rendered home/index.html.haml within layouts/application (61.1ms)
+Completed 200 OK in 237ms (Views: 233.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/searchbac.jpg" for 127.0.0.1 at 2016-03-21 08:38:32 +0000
