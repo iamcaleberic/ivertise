@@ -1,5 +1,13 @@
-= render 'layouts/menu'
+-if user_signed_in?
+  = render 'home/menu'
+-elsif admin_signed_in?
+  = render 'layouts/aheader'
 %h1 Static#privacy_policy
 %p Find me in app/views/static/privacy_policy.html.haml
+
+- if admin_signed_in?
+  %button.ui.red.button Edit
+-else
+
 = render "layouts/footer"
 

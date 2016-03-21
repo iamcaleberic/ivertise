@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get 'home/muas'
   get 'home/photographers'
 
+
   get 'images' => 'home#images', as: :images
-  #get 'admin/index'
+  get 'admins/index'
 
   devise_for :admins
   resources :messages
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :photos
   root 'home#index'
+  get 'admins/approved'
 
   get 'contact_us' => 'static#contact_us', as: :contact
   get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms

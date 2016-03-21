@@ -1,5 +1,11 @@
-= render 'layouts/menu'
+-if user_signed_in?
+  = render 'home/menu'
+-elsif admin_signed_in?
+  = render 'layouts/aheader'
 %h1 Static#terms_and_conditions
 %p Find me in app/views/static/terms_and_conditions.html.haml
-= render "layouts/footer"
+- if admin_signed_in?
+  %button.ui.red.button Edit
+-else
 
+= render "layouts/footer"
