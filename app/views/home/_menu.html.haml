@@ -1,0 +1,31 @@
+-if user_signed_in?
+
+  / header
+  .ui.fixed.white.menu{:style => "margin-bottom: 50px"}
+    .ui.container
+      =link_to root_path do
+        = image_tag("logo.png")
+      %a.header.item{:href => "#"}
+      -#= link_to "Home" , root_path , :class =>"item"
+      =link_to 'Payment History', '', class: 'item'
+      / =link_to 'Portfolio', '', class: 'item'
+      =link_to 'Photo Stats', '', class: 'item'
+      =link_to 'Download History', '', class: 'item'
+
+      .item
+        = link_to messages_path do
+          %i.large.mail.outline.icon
+          -if @messages.nil?
+            0
+
+        -# @messages.each do |m|
+
+
+    = link_to 'Upload Photos', new_photo_path, class: 'item'
+    
+    = link_to 'Settings', edit_user_registration_path, class: 'item'
+    = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'item'
+
+-else
+  = link_to 'Register', new_user_registration_path, class: 'item'
+  = link_to 'Login', new_user_session_path, class: 'item'

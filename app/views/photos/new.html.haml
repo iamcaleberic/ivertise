@@ -1,0 +1,12 @@
+=render 'home/menu'
+
+.ui.container
+	.ui.grid.centered
+		.five.wide.column
+			.ui.green.segment
+				.ui.form
+					%h1 New photo
+
+					= render 'form'
+
+					-#= link_to 'Back', photos_path

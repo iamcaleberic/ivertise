@@ -3,6 +3,24 @@ Rails.application.routes.draw do
   devise_for :muas
   devise_for :models
   devise_for :users
+  get 'static/contact_us'
+
+  get 'static/terms_and_conditions'
+
+  get 'static/privacy_policy'
+
+  devise_for :admins
+  resources :messages
+  resources :photos
+  #devise_for :users
+
+  resources :photos
+  #root 'home#index'
+
+  get 'contact_us' => 'static#contact_us', as: :contact
+  get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms
+  get 'privacy_policy' => 'static#privacy_policy', as: :privacy
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get "models/index" =>"models#index"

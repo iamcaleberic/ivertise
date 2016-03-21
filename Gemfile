@@ -1,11 +1,24 @@
 source 'https://rubygems.org'
 gem 'rails', '4.2.5.2'
 
-
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
+group :test do
+	gem 'sqlite3'
+end
+group :development do
+	gem 'mysql2'
+end
+group :production do
+	gem 'pg'
+end
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'therubyracer', platforms: :ruby
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
@@ -37,3 +50,13 @@ group :development do
   gem 'spring'
 end
 
+gem 'devise'
+gem 'paperclip'
+
+gem 'haml-rails', '~> 0.9.0'
+gem "erb2haml", :group => :development
+
+# gem 'will-paginate'
+# gem 'public-activity'
+# gem 'site-map-generator'
+# gem 'sweet-alert'

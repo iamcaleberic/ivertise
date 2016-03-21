@@ -1,0 +1,16 @@
+= render 'home/menu'
+
+.ui.container
+	.ui.grid
+		= @photo.to_json
+		-# @photo.each do |pic|
+			.four.wide.column
+				-#= image_tag pic.image(:thumb)
+				-#= pic.id
+				-#= link_to 'Edit', edit_photo_path(pic.id)
+	
+	-#\|
+	-#= link_to 'Back', photos_path
+
+	
+		

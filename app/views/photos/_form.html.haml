@@ -1,0 +1,38 @@
+= form_for @photo do |f|
+  - if @photo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@photo.errors.count, "error")} prohibited this photo from being saved:"
+      %ul
+        - @photo.errors.full_messages.each do |msg|
+          %li= msg
+
+
+
+  .field
+    = f.label :title
+    %br/
+    = f.text_field :title, autofocus: true, placeholder: 'Image Title'
+  .field
+    = f.label :price
+    %br/
+    =f.text_field :price, placeholder: 'Image Price'
+
+  .field
+    = f.file_field :image
+
+  .field
+    = f.label :description
+    %br/
+    = f.text_area :description, placeholder: 'Description'
+
+
+  .field
+    = f.label :keywords
+    %br/
+    = f.text_field :keywords, placeholder: 'Keywords'
+
+  .field
+    = f.hidden_field :user_id, :value => current_user.id
+
+  .actions
+    = f.submit 'Upload', class: 'ui green button', style: 'float: right;'
