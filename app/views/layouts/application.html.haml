@@ -18,9 +18,7 @@
         margin-top: 5%;
       }
   %body
-    .error
-      -if notice
-        %p.notice= notice
-      -if alert
-        %p.alert= alert
+    - flash.each do |key, value|
+      %div{:class => "text-center #{flash_class(key)}"}
+        = value
     = yield

@@ -3,11 +3,12 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   attr_accessor :login
+  acts_as_messageable
+  has_many :photos #has many becomes plural
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :photos #has many becomes plural
 
 
   # Only allow letter, number, underscore and punctuation.
@@ -32,4 +33,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def mailboxer_name
+    self.name
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
 end

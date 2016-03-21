@@ -11,10 +11,11 @@
       / =link_to 'Portfolio', '', class: 'item'
 
       .item
-        = link_to messages_path do
-          %i.large.mail.outline.icon
-          -if @messages.nil?
-            0
+        =link_to 'Inbox', mailbox_inbox_path
+        -#= link_to messages_path do
+          -#%i.large.mail.outline.icon
+          -#-if @messages.nil?
+            -#0
 
         -# @messages.each do |m|
 
