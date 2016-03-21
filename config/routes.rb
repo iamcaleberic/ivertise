@@ -5,6 +5,14 @@ Rails.application.routes.draw do
 
   get 'static/privacy_policy'
 
+  get 'home/images'
+  get 'home/models'
+  get 'home/muas'
+  get 'home/photographers'
+
+  get 'images' => 'home#images', as: :images
+  #get 'admin/index'
+
   devise_for :admins
   resources :messages
   resources :photos

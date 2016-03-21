@@ -1,0 +1,15 @@
+.ui.fixed.white.menu
+  .ui.container
+
+    -#= link_to "Home" , root_path , :class =>"item"
+    =link_to 'Images', home_images_path, class: 'item'
+    =link_to 'Models', home_models_path, class: 'item'
+    =link_to 'Photographers', home_photographers_path, class: 'item'
+    =link_to 'MUA', home_muas_path, class: 'item'
+
+  -if user_signed_in?
+    = link_to 'Log Out', destroy_user_session_path,:method => :delete, class: 'item'
+
+  -else
+    = link_to 'Register', new_user_registration_path, class: 'item'
+    = link_to 'Login', new_user_session_path, class: 'item'
