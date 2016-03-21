@@ -5,5 +5,8 @@ class HomeController < ApplicationController
     if user_signed_in?
       redirect_to photos_path(current_user.id)
     end
+    if admin_signed_in?
+    	render 'admin/index'
+    end
   end
 end
