@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  #Authentication
+
 
   # Only allow letter, number, underscore and punctuation.
   validate :validate_username

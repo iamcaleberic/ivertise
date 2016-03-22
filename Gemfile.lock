@@ -49,6 +49,7 @@ GEM
       will_paginate
     builder (3.2.2)
     byebug (8.2.2)
+    cancancan (1.13.1)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -254,6 +255,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-will_paginate
   byebug
+  cancancan (~> 1.10)
   chosen-rails
   coffee-rails (~> 4.1.0)
   devise
