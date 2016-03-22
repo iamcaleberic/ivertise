@@ -58,26 +58,26 @@
 
             %hr
                 
-            .field#tag
+            .field
               = f.label :username
               %br/
               = f.text_field :username
-            .field#tag
+            .field
               = f.label :names
               %br/
               = f.text_field :names, autofocus: true
-            .field#tag
+            .field
               = f.label :email
               %br/
               = f.email_field :email
-            .field#tag
+            .field
               = f.label :password
               - if @minimum_password_length
                 %em
                   (#{@minimum_password_length} characters minimum)
               %br/
               = f.password_field :password, autocomplete: "off"
-            .field#tag
+            .field
               = f.label :password_confirmation
               %br/
               = f.password_field :password_confirmation, autocomplete: "off"
