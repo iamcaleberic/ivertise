@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '4.2.5.2'
 group :test do
-	# gem 'sqlite3'
+	gem 'sqlite3'
 end
 group :development do
 	gem 'mysql2'
