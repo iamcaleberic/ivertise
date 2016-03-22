@@ -1,5 +1,5 @@
 -if current_user
-  =render 'home/menu'
+  =render 'layouts/pheader'
 -elsif current_admin
   =render 'layouts/aheader'
 .ui.container
@@ -21,6 +21,10 @@
         = f.label :avatar, class: 'col-sm-2 control-label'
         .col-sm-6
           = f.file_field :avatar, class: 'ui button'
+      .field
+        = f.label :username
+        %br/
+        = f.text_field :username
       .field
         = f.label :names
         %br/

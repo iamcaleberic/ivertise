@@ -6,7 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %script{:src => "https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"}
     = favicon_link_tag "favicon.ico"
     
@@ -18,9 +18,7 @@
         margin-top: 5%;
       }
   %body
-    .error
-      -if notice
-        %p.notice= notice
-      -if alert
-        %p.alert= alert
+    - flash.each do |key, value|
+      %div{:class => "text-center #{flash_class(key)}"}
+        = value
     = yield

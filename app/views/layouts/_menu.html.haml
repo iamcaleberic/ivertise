@@ -1,9 +1,10 @@
 / header
+
 .ui.fixed.white.menu{:style => "margin-bottom: 50px"}
   .ui.container
     = image_tag("logo.png")
     %a.header.item{:href => "#"}
-    = link_to "Home" , root_path , :class =>"item"
+    
     /
       <div class="ui simple dropdown item">
       <i class="dropdown icon"></i>
@@ -30,3 +31,5 @@
 
   = link_to 'Register', new_user_registration_path, class: 'item'
   = link_to 'Login', new_user_session_path, class: 'item'
+  -if signed_in?
+    =link_to "Log Out" ,destroy_user_session_path ,class: 'item'
