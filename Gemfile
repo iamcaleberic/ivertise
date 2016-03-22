@@ -44,14 +44,4 @@ gem 'will_paginate'
 gem 'public_activity'
 # gem 'site-map-generator'
 gem 'sweet-alert', '~> 0.0.7'
-
-group :test do
-	gem 'sqlite3'
-end
-group :development do
-	gem 'mysql2'
-end
-group :production do
-	gem 'pg'
-end
 gem 'rails_12factor'
