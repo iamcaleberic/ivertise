@@ -11,17 +11,18 @@
       / =link_to 'Portfolio', '', class: 'item'
 
       .item
-        = link_to messages_path do
-          %i.large.mail.outline.icon
-          -if @messages.nil?
-            0
+        =link_to 'Inbox', mailbox_inbox_path
+        -#= link_to messages_path do
+          -#%i.large.mail.outline.icon
+          -#-if @messages.nil?
+            -#0
 
         -# @messages.each do |m|
 
-
+    = link_to current_user.username, edit_user_registration_path, class: 'item'
     = link_to 'Upload Photos', new_photo_path, class: 'item'
     
-    = link_to 'Settings', edit_user_registration_path, class: 'item'
+    -#= link_to 'Settings', edit_user_registration_path, class: 'item'
     = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'item'
 -else
 

@@ -22,6 +22,10 @@
         .col-sm-6
           = f.file_field :avatar, class: 'ui button'
       .field
+        = f.label :username
+        %br/
+        = f.text_field :username
+      .field
         = f.label :names
         %br/
         = f.text_field :names, autofocus: true
