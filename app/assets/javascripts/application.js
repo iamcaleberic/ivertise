@@ -11,7 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require semantic-ui
 //= require turbolinks
+//= require chosen-jquery
+//= require conversations
 //= require_tree .

@@ -19,10 +19,9 @@
         <% if is_conversation %>
             <%= render 'conversations/form' %>
         <% else %>
-        <!-- TODO -->
+            <%= render partial: 'conversations/conversation', collection: messages %>
         <% end %>
       </div>
     </div>
   </div>
-
 </div>
