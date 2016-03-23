@@ -1,12 +1,12 @@
-<div class="ui row">
+<div class=" row column">
   <div class="ui spacer"></div>
-  <div class="ui col-md-12">
+  <div class="twelve wide column">
     <%= link_to "Compose", new_conversation_path, class: "ui green button" %>
     <div class="ui spacer"></div>
   </div>
 <br>
 <br>
-  <div class="col-md-4">
+  <div class="four wide column">
     <div class="ui panel panel-default">
       <div class="panel-body">
         <%= render 'mailbox/folders' %>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="col-md-8">
+  <div class="eight wide column">
     <div class="panel panel-default">
       <div class="panel-body">
         <% if is_conversation %>
