@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
   # Only allow letter, number, underscore and punctuation.
   validate :validate_username
 
+  #show username instead id in url
+  def to_param
+    username
+  end
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
