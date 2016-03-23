@@ -255,7 +255,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-will_paginate
   byebug
-  cancancan (~> 1.10)
+  cancancan
   chosen-rails
   coffee-rails (~> 4.1.0)
   devise
