@@ -47,3 +47,5 @@ gem 'public_activity'
 # gem 'site-map-generator'
 gem 'sweet-alert', '~> 0.0.7'
 gem 'rails_12factor'
+
+gem 'pesapal'

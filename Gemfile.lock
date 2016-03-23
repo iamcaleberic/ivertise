@@ -111,6 +111,7 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -146,6 +147,8 @@ GEM
       mimemagic (= 0.3.0)
     paperclip-watermark (1.0.0)
       paperclip (>= 2.3.8)
+    pesapal (1.6.0)
+      htmlentities
     pg (0.18.4)
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
@@ -256,6 +259,7 @@ DEPENDENCIES
   mysql2
   paperclip
   paperclip-watermark
+  pesapal
   pg
   public_activity
   rails (= 4.2.5.2)
