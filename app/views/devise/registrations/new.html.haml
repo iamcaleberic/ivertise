@@ -18,44 +18,44 @@
           / %h2 Sign up
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             = devise_error_messages!
-            - unless :is_admin
-              .field
-                .ui.four.column.grid
-                  .column
-                    .ui.fluid.card
-                      .image
-                        =image_tag 'logo.png'
-                      
-                      .content
-                        %p{style: 'float: right'} Image Contributor
-                        = f.radio_button :is_contributor, ''
+            
+            .field
+              .ui.four.column.grid
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      %p{style: 'float: right'} Image Contributor
+                      = f.radio_button :is_contributor?, ''
 
-                  .column
-                    .ui.fluid.card
-                      .image
-                        =image_tag 'logo.png'
-                      
-                      .content
-                        %p{style: 'float: right'} Photographer
-                        = f.radio_button :is_photographer, ''
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      %p{style: 'float: right'} Photographer
+                      = f.radio_button :is_photographer?, ''
 
-                  .column
-                    .ui.fluid.card
-                      .image
-                        =image_tag 'logo.png'
-                      
-                      .content
-                        %p{style: 'float: right'} Model
-                        = f.radio_button :is_model, ''
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      %p{style: 'float: right'} Model
+                      = f.radio_button :is_model?,  ''
 
-                  .column
-                    .ui.fluid.card
-                      .image
-                        =image_tag 'logo.png'
-                      
-                      .content
-                        %p{style: 'float: right'} Make-up Artist
-                        = f.radio_button :is_mua, ''
+                .column
+                  .ui.fluid.card
+                    .image
+                      =image_tag 'logo.png'
+                    
+                    .content
+                      %p{style: 'float: right'} Make-up Artist
+                      = f.radio_button :is_mua?,  ''
 
             %hr
                 
@@ -83,14 +83,14 @@
               %br/
               = f.password_field :password_confirmation, autocomplete: "off"
             .actions
-              = f.submit "Sign up", class: 'ui button'
+              = f.submit "Sign up", class: 'ui green button'
 
 
-          .ui.bottom.attached.warning.message
-            %i.icon.help
-            Already signed in?
-            = link_to 'Login here', new_user_session_path 
-            instead. 
+          / .ui.bottom.attached.warning.message
+          /   %i.icon.help
+          /   Already signed in?
+          /   = link_to 'Login here', new_user_session_path 
+           
 
           -#= render "devise/shared/links"
 

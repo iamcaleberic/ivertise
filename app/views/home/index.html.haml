@@ -7,7 +7,7 @@
   .banner
     %center
       #search.ui.action.input
-        %input{:placeholder => "Search Images , Models ...", :type => "text"}/
+        %input{:placeholder => "Search Images , Models ,MUAs and Photogrphers...", :type => "text"}/
         %select.ui.compact.selection.dropdown
           %option{:selected => "all"} All
           %option{:value => "selected", :value => "articles"} Images
@@ -35,12 +35,15 @@
                     = image_tag p.image(:medium)
 
           :javascript
-            var $container = jQuery('#masonry-grid');
-            // initialize
-            $container.masonry({
-              columnWidth: 50,
-              itemSelector: '#picha'
+            $(document).ready(function(){
+              var $container = jQuery('#masonry-grid');
+              // initialize
+              $container.masonry({
+                columnWidth: 50,
+                itemSelector: '#picha'
+              });
             });
+            
 
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
           Images
@@ -51,7 +54,8 @@
         .ui.bottom.attached.tab.segment{"data-tab" => "five"}
           Models
   = render "layouts/footer"
-
+   
+  
   :javascript
     $(document).ready(function(){
       $('.tabular.menu .item').tab();
