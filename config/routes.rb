@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
   get 'static/contact_us'
 
   #get 'static/terms_and_conditions'
@@ -18,7 +20,12 @@ Rails.application.routes.draw do
   resources :photos
   devise_for :users
 
-  resources :photos
+  resources :users do
+    member do
+      get :photos
+    end
+  end
+  
   root 'home#index'
   get 'admins/approved'
 

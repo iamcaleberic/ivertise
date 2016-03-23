@@ -1,10 +1,10 @@
 class PhotosController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!, except: [:index] 
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
   # GET /photos.json
-  def index
+  def index    
     @photos = Photo.all
     @user = current_user.id
     @pic = Photo.where(:user_id => "#{current_user.id}")

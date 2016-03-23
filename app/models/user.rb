@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   attr_accessor :login
+
   acts_as_messageable
-  has_many :photos #has many becomes plural
+  has_many :photos, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
