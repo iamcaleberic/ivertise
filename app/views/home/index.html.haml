@@ -35,12 +35,15 @@
                     = image_tag p.image(:medium)
 
           :javascript
-            var $container = jQuery('#masonry-grid');
-            // initialize
-            $container.masonry({
-              columnWidth: 50,
-              itemSelector: '#picha'
+            $(document).ready(function(){
+              var $container = jQuery('#masonry-grid');
+              // initialize
+              $container.masonry({
+                columnWidth: 50,
+                itemSelector: '#picha'
+              });
             });
+            
 
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
           Images
