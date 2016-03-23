@@ -5,6 +5,12 @@
     %title Ivertise
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+    = stylesheet_link_tag 'elastic_grid.min', media: 'all', "http-equiv" => "Content-Type"
+    = javascript_include_tag 'modernizr.custom', 'data-turbolinks-track' => true
+    = javascript_include_tag 'classie', 'data-turbolinks-track' => true
+    = javascript_include_tag 'elastic_grid.encode', 'data-turbolinks-track' => true
+
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %script{:src => "https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"}

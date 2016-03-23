@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   # Only allow letter, number, underscore and punctuation.
   validate :validate_username
 
-  #show username instead id in url
+  #show username instead id in url.
   def to_param
     username
   end
