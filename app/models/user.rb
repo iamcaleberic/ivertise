@@ -5,10 +5,31 @@ class User < ActiveRecord::Base
   attr_accessor :login
   acts_as_messageable
   has_many :photos #has many becomes plural
+  belongs_to :role
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  def admin?
+    self.role.name == 'admin'
+  end
+
+  def contributor?
+    self.role.name == 'contributor'
+  end
+
+  def mua?
+    self.role.name == 'contributor'
+  end
+
+  def model?
+    self.role.name == 'model'
+  end
+
+  def photographer?
+    self.role.name == 'photographer'
+  end
 
   #Authentication
 

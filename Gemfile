@@ -26,9 +26,9 @@ gem 'devise'
 gem 'paperclip'
 gem 'paperclip-watermark'
 #temporary til we can replace with semantic ish
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'semantic-ui-sass'
-gem 'bootstrap-will_paginate'
+# gem 'bootstrap-will_paginate'
 
 
 gem 'haml-rails', '~> 0.9.0'

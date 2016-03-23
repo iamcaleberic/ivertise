@@ -4,12 +4,54 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
+    user ||= User.new # guest user (not logged in)
+    if user.admin?
+        can :manage, :all
+    # else
+    # can :read, :all
+    # end
+
+    elsif user.contributor?
+        can :read, Photo
+        can :create, Photo
+        can :update, Photo do |p|
+            p.try(:user) == user
+        end
+        can :destroy, Photo do |p|
+            p.try(:user) == user
+        end
+    elsif user.mua?
+        can :read, Photo
+        can :create, Photo
+        can :update, Photo do |p|
+            p.try(:user) == user
+        end
+        can :destroy, Photo do |p|
+            p.try(:user) == user
+        end
+    elsif user.model?
+        can :read, Photo
+        can :create, Photo
+        can :update, Photo do |p|
+            p.try(:user) == user
+        end
+        can :destroy, Photo do |p|
+            p.try(:user) == user
+        end
+    elsif user.photographer?
+        can :read, Photo
+        can :create, Photo
+        can :update, Photo do |p|
+            p.try(:user) == user
+        end
+        can :destroy, Photo do |p|
+            p.try(:user) == user
+        end
+    end
+            
+            
+        
+        
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
