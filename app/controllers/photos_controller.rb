@@ -12,6 +12,9 @@ class PhotosController < ApplicationController
     #It should allow you to search through
     @user = current_user.id
     @pic = Photo.where(:user_id => "#{current_user.id}")
+
+    @picha = [{:title => '', :description => '', :thumbnail => '', :large => ''}]
+
     # @photos = Photo.find_by(:user_id => @user)
 =begin
     if params[:search]
