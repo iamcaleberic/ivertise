@@ -1,5 +1,5 @@
 -if current_user
-  =render 'home/menu'
+  =render 'layouts/pheader'
 -elsif current_admin
   =render 'layouts/aheader'
 .ui.container
@@ -7,6 +7,8 @@
     %i.large.home.icon
     =link_to "Home", root_path, class: 'item'
 
+  %br
+  %br
   .ui.form
     %h2
       Edit #{resource_name.to_s.humanize}

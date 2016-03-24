@@ -16,16 +16,15 @@
     = f.label :price
     %br/
     =f.text_field :price, placeholder: 'Image Price'
+  / -if :is_contributor?
+  /   .field
+  /     =f.label :release_form
+  /     = f.file_field :release_forms
 
   .field
+    =f.label :image
     = f.file_field :image
-
-  .field
-    = f.label :description
-    %br/
-    = f.text_area :description, placeholder: 'Description'
-
-
+    
   .field
     = f.label :keywords
     %br/

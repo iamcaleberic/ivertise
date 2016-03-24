@@ -1,7 +1,11 @@
 =render 'layouts/pheader'
+%br
+%br
 =image_tag("logo.png")
+
 %center
-	.ui.action.input
-		%input{:placeholder => "Search...", :type => "text"}
+	#searchb.ui.action.input
+		%input{:placeholder => "Search Images...", :type => "text"}
 			%button.ui.icon.button
 				%i.search.icon
+

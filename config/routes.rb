@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   resources :roles
+=======
+  get 'users/index'
+
+>>>>>>> master
   get 'static/contact_us'
 
   #get 'static/terms_and_conditions'
@@ -10,16 +15,23 @@ Rails.application.routes.draw do
   get 'home/muas'
   get 'home/photographers'
 
+
   get 'images' => 'home#images', as: :images
-  #get 'admin/index'
+  get 'admins/index'
 
   devise_for :admins
   resources :messages
   resources :photos
   devise_for :users
 
-  resources :photos
+  resources :users do
+    member do
+      get :photos
+    end
+  end
+  
   root 'home#index'
+  get 'admins/approved'
 
   get 'contact_us' => 'static#contact_us', as: :contact
   get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms

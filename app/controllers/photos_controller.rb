@@ -1,10 +1,10 @@
 class PhotosController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!, except: [:index] 
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
   # GET /photos.json
-  def index
+  def index    
     @photos = Photo.all
     @user = current_user.id
     @pic = Photo.where(:user_id => "#{current_user.id}")
@@ -76,7 +76,7 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      # params.fetch(:photo, {:image})
+      #params.fetch(:photo, {:image})
       params.require(:photo).permit(:image, :user_id, :title, :price, :description, :keywords, :user_id)
     end
 end

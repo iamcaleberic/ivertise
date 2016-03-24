@@ -3,9 +3,14 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   attr_accessor :login
+
   acts_as_messageable
+<<<<<<< HEAD
   has_many :photos #has many becomes plural
   belongs_to :role
+=======
+  has_many :photos, dependent: :destroy
+>>>>>>> master
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -36,6 +41,11 @@ class User < ActiveRecord::Base
 
   # Only allow letter, number, underscore and punctuation.
   validate :validate_username
+
+  #show username instead id in url
+  def to_param
+    username
+  end
 
   def validate_username
     if User.where(email: username).exists?

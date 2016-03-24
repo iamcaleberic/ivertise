@@ -7,7 +7,7 @@
   .banner
     %center
       #search.ui.action.input
-        %input{:placeholder => "Search Images , Models ...", :type => "text"}/
+        %input{:placeholder => "Search Images , Models ,MUAs and Photogrphers...", :type => "text"}/
         %select.ui.compact.selection.dropdown
           %option{:selected => "all"} All
           %option{:value => "selected", :value => "articles"} Images
@@ -20,9 +20,10 @@
       .fifteen.wide.column
         .ui.top.attached.tabular.menu{style: "width: 100%"}
           %a.active.item{"data-tab" => "first"} All
-          %a.item{"data-tab" => "second"} Make Up Artists
-          %a.item{"data-tab" => "third"} Photographers
-          %a.item{"data-tab" => "four"} Models
+          %a.item{"data-tab" => "second"} Images
+          %a.item{"data-tab" => "third"} Make Up Artists
+          %a.item{"data-tab" => "four"} Photographers
+          %a.item{"data-tab" => "five"} Models
 
         .ui.bottom.attached.tab.segment.active{"data-tab" => "first"}
           
@@ -34,22 +35,27 @@
                     = image_tag p.image(:medium)
 
           :javascript
-            var $container = jQuery('#masonry-grid');
-            // initialize
-            $container.masonry({
-              columnWidth: 50,
-              itemSelector: '#picha'
+            $(document).ready(function(){
+              var $container = jQuery('#masonry-grid');
+              // initialize
+              $container.masonry({
+                columnWidth: 50,
+                itemSelector: '#picha'
+              });
             });
+            
 
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
-          Make Up Artists
+          Images
         .ui.bottom.attached.tab.segment{"data-tab" => "third"}
-          Photographers
+          MUA
         .ui.bottom.attached.tab.segment{"data-tab" => "four"}
+          Photographers
+        .ui.bottom.attached.tab.segment{"data-tab" => "five"}
           Models
-
   = render "layouts/footer"
-
+   
+  
   :javascript
     $(document).ready(function(){
       $('.tabular.menu .item').tab();
