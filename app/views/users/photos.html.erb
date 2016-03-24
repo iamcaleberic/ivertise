@@ -3,6 +3,9 @@
 	<div class="row">
 		<div id="masonry-grid">
 			<% @photos.each do |photo| %>
+			<div>
+				<p>phots by <%#= photo.username%></p>
+			</div>
 			<div id="picha">
 				<div class="ui card">
 					<div class="image">
@@ -22,3 +25,116 @@
       itemSelector: '#picha'
     });
 </script>
+
+
+<h1>EXPERIMENT ON Zed CARDS </h1>
+<div id="elastic_grid_demo"></div>
+
+<!-- Initial Script -->
+    <script type="text/javascript">
+     
+        $(function(){
+     
+            $("#elastic_grid_demo").elastic_grid({
+                'items' :
+                [
+                    {
+                        'title'         : 'Title #1',
+                        'description'   : ' Description text here',
+                        'thumbnail'     : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'large'         : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Portrait','Vintage','BW']
+                    },
+                    {
+                        'title'         : 'Title #2',
+                        'description'   : 'Description text here',
+                        'thumbnail'     : ['https://images5.alphacoders.com/417/417259.jpg', 'https://images5.alphacoders.com/417/417259.jpg'],
+                        'large'         : ['https://images5.alphacoders.com/417/417259.jpg', 'https://images5.alphacoders.com/417/417259.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Vintage']
+                    },
+                    {
+                        'title'         : 'Title #3',
+                        'description'   : 'Description text here',
+                        'thumbnail'     : ['http://www.pagewallpaper.com/wp-content/uploads/2016/02/Deadpool-wallpaper-page001.jpg', 'http://www.pagewallpaper.com/wp-content/uploads/2016/02/Deadpool-wallpaper-page001.jpg'],
+                        'large'         : ['http://www.pagewallpaper.com/wp-content/uploads/2016/02/Deadpool-wallpaper-page001.jpg', 'http://www.pagewallpaper.com/wp-content/uploads/2016/02/Deadpool-wallpaper-page001.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['BW']
+                    },
+                    {
+                        'title'         : 'Title #1',
+                        'description'   : ' Description text here',
+                        'thumbnail'     : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'large'         : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Portrait','Vintage','BW']
+                    },
+                    {
+                        'title'         : 'Title #1',
+                        'description'   : ' Description text here',
+                        'thumbnail'     : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'large'         : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Portrait','Vintage','BW']
+                    },
+                    {
+                        'title'         : 'Title #2',
+                        'description'   : 'Description text here',
+                        'thumbnail'     : ['https://images5.alphacoders.com/417/417259.jpg', 'https://images5.alphacoders.com/417/417259.jpg'],
+                        'large'         : ['https://images5.alphacoders.com/417/417259.jpg', 'https://images5.alphacoders.com/417/417259.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Vintage']
+                    },
+                    {
+                        'title'         : 'Title #3',
+                        'description'   : 'Description text here',
+                        'thumbnail'     : ['images/small/15.jpg', 'images/small/2.jpg'],
+                        'large'         : ['images/large/15.jpg', 'images/large/2.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['BW']
+                    },
+                    {
+                        'title'         : 'Title #1',
+                        'description'   : ' Description text here',
+                        'thumbnail'     : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'large'         : ['http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg', 'http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/images/5.jpg'],
+                        'button_list'   :
+                        [
+                            { 'title':'Demo', 'url' : 'http://bonchen.net/' },
+                            { 'title':'Download', 'url':'http://porfolio.bonchen.net/'}
+                        ],
+                        'tags'          : ['Portrait','Vintage','BW']
+                    }
+                ]
+            });
+        });
+    </script>

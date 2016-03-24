@@ -1,5 +1,14 @@
 = render 'home/menu'
 
+- if @posts.present?
+  = render @posts
+- else
+  %p
+    There are no posts containing the term(s) #{params[:search]}
+
+= form_tag(photos_path, :method => "get", id: "search-form") do
+  = text_field_tag :search, params[:search], placeholder: "Search Photos"
+  = submit_tag "Search"
 
 #masonry-grid{style: 'margin-left: 8%;'}
   %center

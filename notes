@@ -1,0 +1,37 @@
+create views for all photos and for individual user.
+
+user details in that profile are as follows
+names
+role
+follow button****
+number of images
+country from
+member since
+
+styles
+	category(ies)
+
+Subjects
+	subjects
+
+About
+	social media links
+	fb twt ig drib 
+
+equipment
+	canon, sony etc
+
+
+that sprockets thingy, just run
+		rake tmp:cache:clear 
+before every commit
+
+
+
+To do
+Search
+https://www.youtube.com/watch?v=eUtUquKc2qQ Stuks
+
+https://www.youtube.com/watch?v=pfZw6yErsX0 random search
+
+https://www.youtube.com/watch?v=MpFO4Zr0EPE  make IG
