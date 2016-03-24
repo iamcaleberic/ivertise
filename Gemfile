@@ -13,6 +13,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
+gem 'cancancan'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -46,4 +47,6 @@ gem 'will_paginate'
 gem 'public_activity'
 # gem 'site-map-generator'
 gem 'sweet-alert', '~> 0.0.7'
+
 gem 'rails_12factor'
+

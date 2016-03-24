@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :roles
   get 'users/index'
-
   get 'static/contact_us'
 
   #get 'static/terms_and_conditions'

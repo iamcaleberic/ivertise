@@ -12,6 +12,10 @@
       .item
         =link_to 'Inbox', mailbox_inbox_path
 
+    .item 
+      = link_to '' do
+        %i.large.cart.icon
+
     = link_to current_user.username, edit_user_registration_path, class: 'item'
     = link_to 'Upload Photos', new_photo_path, class: 'item'
     
