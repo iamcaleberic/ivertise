@@ -6,41 +6,15 @@
       =link_to root_path do
         = image_tag("logo.png")
       %a.header.item{:href => "#"}
-      -#= link_to "Home" , root_path , :class =>"item"
+      
       =link_to 'Payment History', '', class: 'item'
-      / =link_to 'Portfolio', '', class: 'item'
 
       .item
         =link_to 'Inbox', mailbox_inbox_path
-        -#= link_to messages_path do
-          -#%i.large.mail.outline.icon
-          -#-if @messages.nil?
-            -#0
 
-        -# @messages.each do |m|
-    /
-      <div class="ui simple dropdown item">
-      <i class="dropdown icon"></i>
-      <div class="menu">
-      <a class="item" href="#">Link Item</a>
-      <a class="item" href="#">Link Item</a>
-      <div class="divider"></div>
-      <div class="header">Header Item</div>
-      <div class="item">
-      <i class="dropdown icon"></i>
-      Sub Menu
-      <div class="menu">
-      <a class="item" href="#">Link Item</a>
-      <a class="item" href="#">Link Item</a>
-      </div>
-      </div>
-      <a class="item" href="#">Link Item</a>
-      </div>
-      </div>
     = link_to current_user.username, edit_user_registration_path, class: 'item'
     = link_to 'Upload Photos', new_photo_path, class: 'item'
     
-    -#= link_to 'Settings', edit_user_registration_path, class: 'item'
     = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'item'
 -else
 

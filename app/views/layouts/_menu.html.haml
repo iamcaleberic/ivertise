@@ -1,29 +1,8 @@
-/ header
-
 .ui.fixed.white.menu{:style => "margin-bottom: 50px"}
   .ui.container
     = image_tag("logo.png")
     %a.header.item{:href => "#"}
-    
-    /
-      <div class="ui simple dropdown item">
-      <i class="dropdown icon"></i>
-      <div class="menu">
-      <a class="item" href="#">Link Item</a>
-      <a class="item" href="#">Link Item</a>
-      <div class="divider"></div>
-      <div class="header">Header Item</div>
-      <div class="item">
-      <i class="dropdown icon"></i>
-      Sub Menu
-      <div class="menu">
-      <a class="item" href="#">Link Item</a>
-      <a class="item" href="#">Link Item</a>
-      </div>
-      </div>
-      <a class="item" href="#">Link Item</a>
-      </div>
-      </div>
+
     =link_to 'Images', home_images_path, class: 'item'
     =link_to 'Models', home_models_path, class: 'item'
     =link_to 'Photographers', home_photographers_path, class: 'item'
