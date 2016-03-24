@@ -15,19 +15,21 @@
               = image_tag p.image(:large)
 
 = current_user.role.name
-- if @posts.present?
-  = render @posts
-- else
-  %p
-    There are no posts containing the term(s) #{params[:search]}
+/ - if @posts.present?
+/   = render @posts
+/ - else
+/   %p
+/     There are no posts containing the term(s) #{params[:search]}
 
-  :javascript
-    $(document).ready(function(){
-      var $container = jQuery('#masonry-grid');
-      // initialize
+:javascript
+  $(document).ready(function(){
+    var $container = jQuery('#masonry-grid');
+    // initialize
+    $container.imagesLoaded(function(){
       $container.masonry({
         columnWidth: 50,
         itemSelector: '#picha'
       });
     });
-    
+  });
+  
