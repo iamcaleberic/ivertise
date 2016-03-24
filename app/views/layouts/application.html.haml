@@ -23,6 +23,16 @@
       .error{
         margin-top: 5%;
       }
+    :javascript
+      $(document).ready(function(){
+        var $container = jQuery('#masonry-grid');
+        // initialize
+        $container.masonry({
+          columnWidth: 50,
+          itemSelector: '#picha'
+        });
+      });
+        
   %body
     - flash.each do |key, value|
       %div{:class => "text-center #{flash_class(key)}"}

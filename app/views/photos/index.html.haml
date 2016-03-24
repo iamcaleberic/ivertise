@@ -1,4 +1,5 @@
 = render 'home/menu'
+
 :css
   .top{
     margin-top: 2%;
@@ -11,7 +12,14 @@
         #picha
           .ui.card
             .image
-              = image_tag p.image(:medium)
+              = image_tag p.image(:large)
+
+= current_user.role.name
+- if @posts.present?
+  = render @posts
+- else
+  %p
+    There are no posts containing the term(s) #{params[:search]}
 
   :javascript
     $(document).ready(function(){
