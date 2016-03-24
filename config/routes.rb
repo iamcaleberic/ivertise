@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   resources :roles
-=======
   get 'users/index'
-
->>>>>>> master
   get 'static/contact_us'
 
   #get 'static/terms_and_conditions'

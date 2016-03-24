@@ -5,12 +5,9 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   acts_as_messageable
-<<<<<<< HEAD
-  has_many :photos #has many becomes plural
+  # has_many :photos #has many becomes plural
   belongs_to :role
-=======
   has_many :photos, dependent: :destroy
->>>>>>> master
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

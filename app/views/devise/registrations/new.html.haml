@@ -12,7 +12,6 @@
     #image{align: "center"}
       =image_tag('logo.png')
 
-<<<<<<< HEAD
     .ui.grid.centered
       .five.wide.column
 
@@ -38,87 +37,11 @@
                   = f.label :username
                   %br/
                   = f.text_field :username
-=======
-    .ui.segment
-      .ui.form
-        .ui.container
-          / %h2 Sign up
-          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-            = devise_error_messages!
-            
-            .field
-              .ui.four.column.grid
-                .column
-                  .ui.fluid.card
-                    .image
-                      =image_tag 'logo.png'
-                    
-                    .content
-                      %p{style: 'float: right'} Image Contributor
-                      = f.radio_button :is_contributor?, ''
-
-                .column
-                  .ui.fluid.card
-                    .image
-                      =image_tag 'logo.png'
-                    
-                    .content
-                      %p{style: 'float: right'} Photographer
-                      = f.radio_button :is_photographer?, ''
-
-                .column
-                  .ui.fluid.card
-                    .image
-                      =image_tag 'logo.png'
-                    
-                    .content
-                      %p{style: 'float: right'} Model
-                      = f.radio_button :is_model?,  ''
-
-                .column
-                  .ui.fluid.card
-                    .image
-                      =image_tag 'logo.png'
-                    
-                    .content
-                      %p{style: 'float: right'} Make-up Artist
-                      = f.radio_button :is_mua?,  ''
-
-            %hr
-                
-            .field
-              = f.label :username
-              %br/
-              = f.text_field :username
-            .field
-              = f.label :names
-              %br/
-              = f.text_field :names, autofocus: true
-            .field
-              = f.label :email
-              %br/
-              = f.email_field :email
-            .field
-              = f.label :password
-              - if @minimum_password_length
-                %em
-                  (#{@minimum_password_length} characters minimum)
-              %br/
-              = f.password_field :password, autocomplete: "off"
-            .field
-              = f.label :password_confirmation
-              %br/
-              = f.password_field :password_confirmation, autocomplete: "off"
-            .actions
-              = f.submit "Sign up", class: 'ui green button'
->>>>>>> master
 
                 .field#tag
                   = f.label 'Account Type'
                   %br/
                   = collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true})
-
-<<<<<<< HEAD
 
                 .field#tag
                   = f.label :password
@@ -144,14 +67,7 @@
         .ui.segment
           .ui.form
           %hr/
-=======
-          / .ui.bottom.attached.warning.message
-          /   %i.icon.help
-          /   Already signed in?
-          /   = link_to 'Login here', new_user_session_path 
-           
->>>>>>> master
-
+          
           -#= render "devise/shared/links"
 
 :javascript
