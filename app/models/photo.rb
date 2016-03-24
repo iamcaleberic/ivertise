@@ -8,7 +8,7 @@ class Photo < ActiveRecord::Base
 	  where("keywords LIKE ?", "%#{search}") 
 	end
 =end
-
+ attr_accessor :release_form
  attr_accessor :image
   # Paperclip image images
   has_attached_file :image, :processors => [:watermark],
@@ -21,4 +21,8 @@ class Photo < ActiveRecord::Base
                     :path   => ':rails_root/public/assets/image/:id/:style/:basename.:extension',
                     :default_url => "/images/:style/mising.png"
   validates_attachment_content_type :image , :content_type => /\Aimage\/.*\Z/
+
+
+	has_attached_file :release_form
+	validates_attachment :release_form, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
 end
