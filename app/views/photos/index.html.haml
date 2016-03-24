@@ -12,14 +12,20 @@
           .ui.card
             .image
               = image_tag p.image(:medium)
+            .content
+              - if signed_in?
+                = link_to "", class: "button", data: {target: @cart_action, addUrl: add_to_cart_path(p), removeUrl: remove_from_cart_path(p)} do
+                  %i.cart.icon
+                  %span= @cart_action
+                  Cart
 
-  :javascript
-    $(document).ready(function(){
-      var $container = jQuery('#masonry-grid');
-      // initialize
-      $container.masonry({
-        columnWidth: 50,
-        itemSelector: '#picha'
-      });
+:javascript
+  $(document).ready(function(){
+    var $container = jQuery('#masonry-grid');
+    // initialize
+    $container.masonry({
+      columnWidth: 50,
+      itemSelector: '#picha'
     });
-    
+  });
+  

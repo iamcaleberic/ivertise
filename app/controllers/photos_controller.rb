@@ -25,6 +25,8 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @photo = Photo.find(params[:id])
+    @cart_action = @photo.cart_action current_user.try :id
   end
 
   # GET /photos/new

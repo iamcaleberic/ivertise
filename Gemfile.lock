@@ -107,6 +107,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hiredis (0.4.5)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -191,6 +192,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    redis (3.2.2)
     ref (2.0.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
@@ -252,6 +254,7 @@ DEPENDENCIES
   devise
   erb2haml
   haml-rails (~> 0.9.0)
+  hiredis
   jbuilder (~> 2.0)
   jquery-rails
   mailboxer
@@ -262,6 +265,7 @@ DEPENDENCIES
   public_activity
   rails (= 4.2.5.2)
   rails_12factor
+  redis
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   semantic-ui-sass

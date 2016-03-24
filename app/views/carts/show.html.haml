@@ -1,0 +1,21 @@
+#mycart.small-10.small-centered.medium-8.large-8.column
+  .p1.glassy-bg.mb1.text-center.radius-l1.radius-r1
+    %h4 My Cart
+    %p.mb0
+      You've selected
+      %span.cart-count= current_user.cart_count
+      Photos!
+  = @cart_photos.to_json
+  - @cart_photos.each do |photo|
+    .cart-movie.large-12.column.mb1{"data-equalizer" => ""}
+      .column.large-2.text-center.p0{"data-equalizer-watch" => ""}
+        = link_to photo do
+          -#= image_tag movie.poster, class: "radius-l1"
+      .column.large-7.glassy-bg.text-center{"data-equalizer-watch" => ""}
+        %p.scale.ptm
+          -#= movie.title
+      .column.large-3.primary-bg.text-center.radius-r1{"data-equalizer-watch" => ""}
+        = link_to "" , data: {targetUrl: remove_from_cart_path(photo)} do
+          %i.plus.icon
+        %h4.scale
+          -#$ #{movie.price}

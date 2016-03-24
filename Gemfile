@@ -50,3 +50,6 @@ gem 'sweet-alert', '~> 0.0.7'
 
 gem 'rails_12factor'
 
+gem 'redis'
+gem 'hiredis'
+

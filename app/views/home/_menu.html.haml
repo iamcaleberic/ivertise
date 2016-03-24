@@ -13,8 +13,11 @@
         =link_to 'Inbox', mailbox_inbox_path
 
     .item 
-      = link_to '' do
+      = link_to cart_path do
         %i.large.cart.icon
+        My Cart(
+        = current_user.cart_count
+        )
 
     = link_to current_user.username, edit_user_registration_path, class: 'item'
     = link_to 'Upload Photos', new_photo_path, class: 'item'
