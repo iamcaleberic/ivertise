@@ -1,5 +1,5 @@
 class AddFieldToPhotos < ActiveRecord::Migration
   def change
-    add_column :photos, :role, :string
+    add_column :photos, :role_photo, :string
   end
 end

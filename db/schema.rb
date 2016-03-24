@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20160324182805) do
     t.integer  "price"
     t.string   "description"
     t.string   "keywords"
-    t.string   "role"
+    t.string   "role_photo"
     t.string   "release_form_file_name"
     t.string   "release_form_content_type"
     t.integer  "release_form_file_size"

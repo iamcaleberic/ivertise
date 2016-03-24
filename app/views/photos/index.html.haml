@@ -13,6 +13,7 @@
           .ui.card
             .image
               = image_tag p.image(:large)
+              / = p.role_photo
 
 = current_user.role.name
 / - if @posts.present?

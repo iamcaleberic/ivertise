@@ -28,31 +28,109 @@
         .ui.bottom.attached.tab.segment.active{"data-tab" => "first"}
           
           #masonry-grid{style: 'margin-left: 8%;'}
+
             -@photos.each do |p|
               #picha
                 .ui.card
                   .image
                     = image_tag p.image(:large)
+                    =p.role_photo
 
           :javascript
             $(document).ready(function(){
               var $container = jQuery('#masonry-grid');
               // initialize
-              $container.masonry({
-                columnWidth: 50,
-                itemSelector: '#picha'
+              $container.imagesLoaded(function(){
+                $container.masonry({
+                  columnWidth: 50,
+                  itemSelector: '#picha'
+                });
               });
             });
-            
 
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
-          Images
+         
+          #masonry-grid{style: 'margin-left: 8%;'}
+            -@photos.each do |p|
+              #picha
+                .ui.card
+                  .image
+                    = image_tag p.image(:large) if p.role_photo =="contributor"
+
+            :javascript
+              $(document).ready(function(){
+                var $container = jQuery('#masonry-grid');
+                // initialize
+                $container.imagesLoaded(function(){
+                  $container.masonry({
+                    columnWidth: 50,
+                    itemSelector: '#picha'
+                  });
+                });
+              });
+    
+                   
         .ui.bottom.attached.tab.segment{"data-tab" => "third"}
-          MUA
+          #masonry-grid{style: 'margin-left: 8%;'}
+            -@photos.each do |p|
+              #picha
+                .ui.card
+                  .image
+                    = image_tag p.image(:large) if p.role_photo =="MUA"
+
+            :javascript
+              $(document).ready(function(){
+                var $container = jQuery('#masonry-grid');
+                // initialize
+                $container.imagesLoaded(function(){
+                  $container.masonry({
+                    columnWidth: 50,
+                    itemSelector: '#picha'
+                  });
+                });
+              });
+    
         .ui.bottom.attached.tab.segment{"data-tab" => "four"}
-          Photographers
+
+          #masonry-grid{style: 'margin-left: 8%;'}
+            -@photos.each do |p|
+              #picha2
+                .ui.card
+                  .image
+                    = image_tag p.image(:large) if p.role_photo =="photographer"
+
+            :javascript
+              $(document).ready(function(){
+                var $container = jQuery('#masonry-grid');
+                // initialize
+                $container.imagesLoaded(function(){
+                  $container.masonry({
+                    columnWidth: 50,
+                    itemSelector: '#picha2'
+                  });
+                });
+              });
+    
         .ui.bottom.attached.tab.segment{"data-tab" => "five"}
-          Models
+          #masonry-grid{style: 'margin-left: 8%;'}
+            -@photos.each do |p|
+              #picha
+                .ui.card
+                  .image
+                    = image_tag p.image(:large) if p.role_photo =="model"
+            :javascript
+              $(document).ready(function(){
+                var $container = jQuery('#masonry-grid');
+                // initialize
+                $container.imagesLoaded(function(){
+                  $container.masonry({
+                    columnWidth: 50,
+                    itemSelector: '#picha'
+                  });
+                });
+              });
+            
+
   = render "layouts/footer"
    
   

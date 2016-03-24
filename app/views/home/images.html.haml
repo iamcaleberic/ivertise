@@ -8,4 +8,10 @@
 		%input{:placeholder => "Search Images...", :type => "text"}
 			%button.ui.icon.button
 				%i.search.icon
-
+			
+#masonry-grid{style: 'margin-left: 8%;'}
+	-@photos.each do |p|
+		#picha
+			.ui.card
+				.image
+					= image_tag p.image(:large) if p.role_photo == "contributor"
