@@ -6,6 +6,8 @@
   }
 
 .top
+  #elastic_grid_demo
+
   #masonry-grid{style: 'margin-left: 8%;'}
     %center
       -@pic.each do |p|
@@ -13,13 +15,7 @@
           .ui.card
             .image
               = image_tag p.image(:large)
-
-= current_user.role.name
-/ - if @posts.present?
-/   = render @posts
-/ - else
-/   %p
-/     There are no posts containing the term(s) #{params[:search]}
+              
 
 :javascript
   $(document).ready(function(){
@@ -32,4 +28,10 @@
       });
     });
   });
-  
+
+  $(function(){
+    $('#elastic_grid_demo').elastic_grid({
+      'showAllText' : 'All',
+      'items': [{}]
+    });
+  });
