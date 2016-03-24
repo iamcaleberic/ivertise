@@ -16,10 +16,10 @@
     = f.label :price
     %br/
     =f.text_field :price, placeholder: 'Image Price'
-  / -if :is_contributor?
-  /   .field
-  /     =f.label :release_form
-  /     = f.file_field :release_forms
+  -if current_user.role.name == "contributor"
+    .field
+      =f.label :release_form
+      = f.file_field :release_form
 
   .field
     =f.label :image
