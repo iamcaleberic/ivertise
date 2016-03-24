@@ -57,29 +57,14 @@
                 .actions
                   = f.submit "Sign up", class: 'ui button'
 
-<<<<<<< HEAD
-
               .ui.bottom.attached.warning.message
                 %i.icon.help
                 Already signed in?
                 = link_to 'Login here', new_user_session_path 
                 instead.
 
-=======
-
-              .ui.bottom.attached.warning.message
-                %i.icon.help
-                Already signed in?
-                = link_to 'Login here', new_user_session_path 
-                instead. 
-      .five.wide.column#change
-        .ui.segment
-          .ui.form
-          %hr/
-          
           -#= render "devise/shared/links"
 
->>>>>>> Roles
 :javascript
   $(function(){
     $('#change').hide();
