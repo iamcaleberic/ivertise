@@ -1,5 +1,4 @@
 create views for all photos and for individual user.
-remember that dribble app last yea. study it, clone it bla bla bla it
 
 user details in that profile are as follows
 names
@@ -21,3 +20,18 @@ About
 
 equipment
 	canon, sony etc
+
+
+that sprockets thingy, just run
+		rake tmp:cache:clear 
+before every commit
+
+
+
+To do
+Search
+https://www.youtube.com/watch?v=eUtUquKc2qQ Stuks
+
+https://www.youtube.com/watch?v=pfZw6yErsX0 random search
+
+https://www.youtube.com/watch?v=MpFO4Zr0EPE  make IG
