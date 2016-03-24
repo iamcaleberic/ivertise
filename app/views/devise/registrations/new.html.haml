@@ -1,7 +1,4 @@
 =render 'layouts/pheader'
-.ui.container
-  %i.large.home.icon
-  =link_to "Home", root_path, class: 'item'
 
 :css
   .top{
@@ -12,64 +9,112 @@
     #image{align: "center"}
       =image_tag('logo.png')
 
-    .ui.grid.centered
-      .five.wide.column
-
-        .ui.segment
-          .ui.form
-            .ui.container
-              / %h2 Sign up
-              = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-                = devise_error_messages!
-
-                %hr
-
-                .field#tag
+    .ui.grid
+      .ui.stackable.two.column.grid
+        .ui.form
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+            .column
+              .ui.segment
+                %hr/
+                .field
                   = f.label :names
                   %br/
                   = f.text_field :names, autofocus: true
-                .field#tag
+                .field
                   = f.label :email
                   %br/
                   = f.email_field :email
 
-                .field#tag
+                .field
                   = f.label :username
                   %br/
                   = f.text_field :username
 
-                .field#tag
+                .field
                   = f.label 'Account Type'
                   %br/
                   = collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true})
+            .top
+              .column
+                .ui.segment#more
+                  %hr/
+                  .field
+                    = f.label :phone
+                    %br/
+                    = f.text_field :phone
+                  .field
+                    = f.label :country
+                    %br/
+                    = f.text_field :country
+                  .field
+                    = f.label :date_of_birth
+                    %br/
+                    = f.text_field :date_of_birth
+                  .field
+                    = f.label :gender
+                    %br/
+                    = f.text_field :height
+                  .field
+                    = f.label :height
+                    %br/
+                    = f.text_field :height
+                  .field
+                    = f.label :weight
+                    %br/
+                    = f.text_field :weight
+                  .field
+                    = f.label :city
+                    %br/
+                    = f.text_field :city
+                  .field
+                    = f.label :bust
+                    %br/
+                    = f.text_field :bust
+                  .field
+                    = f.label :waist
+                    %br/
+                    = f.text_field :waist
+                  .field
+                    = f.label :eye_color
+                    %br/
+                    = f.text_field :eye_color
+                  .field
+                    = f.label :shoe_size
+                    = f.text_field :shoe_size
+                  / .field
+                  /   = f.label :names
 
-                .field#tag
-                  = f.label :password
-                  - if @minimum_password_length
-                    %em
-                      (#{@minimum_password_length} characters minimum)
-                  %br/
-                  = f.password_field :password, autocomplete: "off"
-                .field#tag
-                  = f.label :password_confirmation
-                  %br/
-                  = f.password_field :password_confirmation, autocomplete: "off"
-                .actions
-                  = f.submit "Sign up", class: 'ui button'
+            .top
+              .column
+                .ui.segment
+                  %hr/
+                  .field#tag
+                    = f.label :password
+                    - if @minimum_password_length
+                      %em
+                        (#{@minimum_password_length} characters minimum)
+                    %br/
+                    = f.password_field :password, autocomplete: "off"
+                  .field#tag
+                    = f.label :password_confirmation
+                    %br/
+                    = f.password_field :password_confirmation, autocomplete: "off"
 
-              .ui.bottom.attached.warning.message
-                %i.icon.help
-                Already signed in?
-                = link_to 'Login here', new_user_session_path 
-                instead.
+                  .actions
+                    = f.submit "Sign up", class: 'ui button'
 
-          -#= render "devise/shared/links"
+    :javascript
+      $('document').ready(function(){
+        / $('#more').hide();
+      });
 
 :javascript
   $(function(){
     $('#change').hide();
     $('#user_role_id').change(function(){
-      alert('new value');
-      $('#change').show();
+      var e = document.getElementById("user_role_id");
+      var strV = e.options[e.selectedIndex].value;
+      alert(strV);
     });
   });
