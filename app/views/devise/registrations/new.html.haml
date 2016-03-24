@@ -15,7 +15,7 @@
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             = devise_error_messages!
             .column
-              .ui.segment
+              .ui.green.segment
                 %hr/
                 .field
                   = f.label :names
@@ -37,57 +37,69 @@
                   = collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true})
             .top
               .column
-                .ui.segment#more
+                .ui.green.segment#more
                   %hr/
                   .field
-                    = f.label :phone
-                    %br/
-                    = f.text_field :phone
+                    .three.fields
+                      .field
+                        = f.label :phone
+                        %br/
+                        = f.text_field :phone
+
+                      .field
+                        = f.label :country
+                        %br/
+                        = f.text_field :country
+
+                      .field
+                        = f.label :date_of_birth
+                        %br/
+                        = f.text_field :date_of_birth
+
                   .field
-                    = f.label :country
-                    %br/
-                    = f.text_field :country
+                    .three.fields
+                      .field
+                        = f.label :gender
+                        %br/
+                        = f.text_field :height
+                      .field
+                        = f.label :height
+                        %br/
+                        = f.text_field :height
+                      .field
+                        = f.label :weight
+                        %br/
+                        = f.text_field :weight
+
                   .field
-                    = f.label :date_of_birth
-                    %br/
-                    = f.text_field :date_of_birth
+                    .three.fields
+                      .field
+                        = f.label :city
+                        %br/
+                        = f.text_field :city
+                      .field
+                        = f.label :bust
+                        %br/
+                        = f.text_field :bust
+                      .field
+                        = f.label :waist
+                        %br/
+                        = f.text_field :waist
+
                   .field
-                    = f.label :gender
-                    %br/
-                    = f.text_field :height
-                  .field
-                    = f.label :height
-                    %br/
-                    = f.text_field :height
-                  .field
-                    = f.label :weight
-                    %br/
-                    = f.text_field :weight
-                  .field
-                    = f.label :city
-                    %br/
-                    = f.text_field :city
-                  .field
-                    = f.label :bust
-                    %br/
-                    = f.text_field :bust
-                  .field
-                    = f.label :waist
-                    %br/
-                    = f.text_field :waist
-                  .field
-                    = f.label :eye_color
-                    %br/
-                    = f.text_field :eye_color
-                  .field
-                    = f.label :shoe_size
-                    = f.text_field :shoe_size
-                  / .field
-                  /   = f.label :names
+                    .two.fields
+                      .field
+                        = f.label :eye_color
+                        %br/
+                        = f.text_field :eye_color
+                      .field
+                        = f.label :shoe_size
+                        %br/
+                        = f.text_field :shoe_size
 
             .top
               .column
-                .ui.segment
+                .ui.green.segment
                   %hr/
                   .field#tag
                     = f.label :password
@@ -106,7 +118,7 @@
 
     :javascript
       $('document').ready(function(){
-        / $('#more').hide();
+        / $('#more').hide();  
       });
 
 :javascript
