@@ -6,9 +6,20 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index    
     @photos = Photo.all
+    #temporary search
+    @photos = Photo.where(["title LIKE ?","%#{params[:search]}%"])
+    #interfering with index if not registered or logged in. Check later and fix
+    #It should allow you to search through
     @user = current_user.id
     @pic = Photo.where(:user_id => "#{current_user.id}")
     # @photos = Photo.find_by(:user_id => @user)
+=begin
+    if params[:search]
+      @photos = Photo.search(params[:search]).order("created_at DESC")
+    else
+      @photos = Photo.all.order('created_at DESC')
+    end
+=end
   end
 
   # GET /photos/1
@@ -18,6 +29,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
+    @user = User.new
     @photo = Photo.new
   end
 
