@@ -65,17 +65,16 @@
                 instead. 
       .five.wide.column#change
         .ui.segment
+          .ui.form
           %hr/
 
           -#= render "devise/shared/links"
 
-/ :javascript:
-/   $(function(){
-/     $('.field#tag').hide();
-/   });
-
-
 :javascript
   $(function(){
     $('#change').hide();
+    $('#user_role_id').change(function(){
+      alert('new value');
+      $('#change').show();
+    });
   });
