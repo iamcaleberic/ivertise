@@ -3,26 +3,11 @@
   .ui.center.aligned.container
     .ui.stackable.divided.grid
       .three.wide.column
-        %h4.ui.header Group 1
-        .ui.link.list
-          %a.item{:href => "#"} Link One
-          %a.item{:href => "#"} Link Two
-          %a.item{:href => "#"} Link Three
-          %a.item{:href => "#"} Link Four
-      .three.wide.column
-        %h4.ui.header Group 2
-        .ui.link.list
-          %a.item{:href => "#"} Link One
-          %a.item{:href => "#"} Link Two
-          %a.item{:href => "#"} Link Three
-          %a.item{:href => "#"} Link Four
-      .three.wide.column
-        %h4.ui.header Group 3
-        .ui.link.list
-          %a.item{:href => "#"} Link One
-          %a.item{:href => "#"} Link Two
-          %a.item{:href => "#"} Link Three
-          %a.item{:href => "#"} Link Four
+
+      .ui.link.list
+        =link_to "About us" ,about_path , :class => "item"
+ 
+   
       .seven.wide.column
         %h4.ui.header Social
         %i.whatsapp.icon

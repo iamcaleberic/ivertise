@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'contact_us' => 'static#contact_us', as: :contact
   get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms
   get 'privacy_policy' => 'static#privacy_policy', as: :privacy
-
+   get 'about_us' => 'static#about_us', as: :about
 
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
