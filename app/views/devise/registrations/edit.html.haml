@@ -110,6 +110,13 @@
               = f.label :dislikes
               %br/
               = f.text_field :dislikes     
+      -if current_user.role.name== "MUA"
+        .field
+          .three.fields
+            .field
+              = f.label :mua_type
+              %br/
+              = f.text_field :mua_type
       .field
         = f.label :password
         %i (leave blank if you don't want to change it)
@@ -124,6 +131,7 @@
         %i (we need your current password to confirm your changes)
         %br/
         = f.password_field :current_password, autocomplete: "off"
+        
       .actions
         = f.submit "Update", class: 'ui green button'
     

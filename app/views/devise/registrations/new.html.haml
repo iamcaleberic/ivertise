@@ -113,7 +113,10 @@
                     = f.label :password_confirmation
                     %br/
                     = f.password_field :password_confirmation, autocomplete: "off"
-
+                  .field
+                    .ui.checkbox
+                      %input{:tabindex => "0", :type => "checkbox"}
+                      %label I agree to the Terms and Conditions
                   .actions
                     = f.submit "Sign up", class: 'ui green button'
 
