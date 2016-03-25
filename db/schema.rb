@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325081520) do
+ActiveRecord::Schema.define(version: 20160325170506) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -113,10 +113,7 @@ ActiveRecord::Schema.define(version: 20160325081520) do
     t.string   "release_form_content_type"
     t.integer  "release_form_file_size"
     t.datetime "release_form_updated_at"
-    t.string   "licence_file_name"
-    t.string   "licence_content_type"
-    t.integer  "licence_file_size"
-    t.datetime "licence_updated_at"
+    t.boolean  "approved"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -157,6 +154,9 @@ ActiveRecord::Schema.define(version: 20160325081520) do
     t.integer  "shoe_size"
     t.string   "username"
     t.integer  "role_id"
+    t.string   "experience"
+    t.string   "job_interest"
+    t.string   "dislikes"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

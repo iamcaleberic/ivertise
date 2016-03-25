@@ -95,6 +95,21 @@
             = f.label :shoe_size
             %br/
             = f.text_field :shoe_size
+      -if current_user.role.name== "model"
+        .field
+          .three.fields
+            .field
+              = f.label :experience
+              %br/
+              = f.text_field :experience
+            .field
+              = f.label :job_interest
+              %br/
+              = f.text_field :job_interest
+            .field
+              = f.label :dislikes
+              %br/
+              = f.text_field :dislikes     
       .field
         = f.label :password
         %i (leave blank if you don't want to change it)
