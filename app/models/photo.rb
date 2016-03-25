@@ -10,6 +10,7 @@ class Photo < ActiveRecord::Base
 	end
 =end
  attr_accessor :release_form
+ attr_accessor :licence
  attr_accessor :image
   # Paperclip image images
   has_attached_file :image, :processors => [:watermark],
@@ -25,5 +26,8 @@ class Photo < ActiveRecord::Base
 
 
 	has_attached_file :release_form
-	validates_attachment :release_form, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
+  validates_attachment :release_form, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
+
+  has_attached_file :licence
+	validates_attachment :licence, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
 end

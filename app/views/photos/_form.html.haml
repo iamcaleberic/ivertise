@@ -20,6 +20,9 @@
     .field
       =f.label :release_form
       = f.file_field :release_form
+    .field
+      =f.label :licence
+      =f.file_field :licence
   .field
     =f.hidden_field :role_photo, :value => current_user.role.name
    
