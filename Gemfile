@@ -49,4 +49,5 @@ gem 'public_activity'
 gem 'sweet-alert', '~> 0.0.7'
 
 gem 'rails_12factor'
+gem 'contact_us'
 

@@ -82,6 +82,8 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 4.0)
     concurrent-ruby (1.0.1)
+    contact_us (1.0.1)
+      rails (>= 4.2.0)
     debug_inspector (0.0.2)
     devise (3.5.6)
       bcrypt (~> 3.0)
@@ -249,6 +251,7 @@ DEPENDENCIES
   cancancan
   chosen-rails
   coffee-rails (~> 4.1.0)
+  contact_us
   devise
   erb2haml
   haml-rails (~> 0.9.0)

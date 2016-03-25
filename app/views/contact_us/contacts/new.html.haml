@@ -1,0 +1,40 @@
+=render 'layouts/pheader'
+.centered.ui.header 
+  %h2= t('.contact_us')
+.ui.form  
+  = form_for @contact, :url => contacts_path, :html => {:class => 'formtastic'} do |f|
+    - if ContactUs.require_name
+      #contact_us_contact_name_input.string.required
+      .two.fields  
+        .field
+          = f.label :name, (t('.name') + content_tag(:abbr, '*', :class => 'required')).html_safe
+          = f.text_field :name
+          - if f.object.errors[:name].present?
+            %p.inline-error= f.object.errors[:name].join(' and ')
+        #contact_us_contact_email_input.string.required
+        .field
+          = f.label :email, (t('.email') + content_tag(:abbr, '*', :class => 'required')).html_safe
+          = f.text_field :email
+          - if f.object.errors[:email].present?
+            %p.inline-error= f.object.errors[:email].join(' and ')
+    - if ContactUs.require_subject
+      #contact_us_contact_subject_input.string.required
+      .four.wide.field
+        = f.label :subject, (t('.subject') + content_tag(:abbr, '*', :class => 'required')).html_safe
+        = f.text_field :subject
+        - if f.object.errors[:subject].present?
+          %p.inline-error= f.object.errors[:subject].join(' and ')
+    #contact_us_contact_message_input.text.required
+      .field
+        = f.label :message, (t('.message') + content_tag(:abbr, '*', :class => 'required')).html_safe
+        = f.text_area :message
+        - if f.object.errors[:message].present?
+          %p.inline-error= f.object.errors[:message].join(' and ')
+      %br    
+    .commit
+      = f.submit :submit, :class => 'submit create', :title => t('.submit') , :class => "ui green button"
+
+.ui.centered.header
+  %h2 Our Location
+  .ui.segment
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:500px;width:1279px;'><div id='gmap_canvas' style='height:500px;width:1279px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://www.add-map.net/'>embed google maps in wordpress</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=89e9527c737f0bfb04f56b7bf2ae025b4dc83362'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(-1.3117524,36.698597800000016),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(-1.3117524,36.698597800000016)});infowindow = new google.maps.InfoWindow({content:'<strong>Ivertise Africa </strong><br>Karen<br> Nairobi<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>

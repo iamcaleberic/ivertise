@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :roles
   get 'users/index'
-  get 'static/contact_us'
 
   #get 'static/terms_and_conditions'
   #get 'static/privacy_policy'
@@ -29,7 +28,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'admins/approved'
 
-  get 'contact_us' => 'static#contact_us', as: :contact
+
   get 'terms_and_conditions' => 'static#terms_and_conditions', as: :terms
   get 'privacy_policy' => 'static#privacy_policy', as: :privacy
    get 'about_us' => 'static#about_us', as: :about
