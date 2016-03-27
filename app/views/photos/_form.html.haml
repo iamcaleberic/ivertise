@@ -18,12 +18,14 @@
     =f.text_field :price, placeholder: 'Image Price'
   -if current_user.role.name == "contributor"
     .field
+      *required for RM/RF images
       =f.label :release_form
       = f.file_field :release_form
     
   .field
     =f.hidden_field :role_photo, :value => current_user.role.name
-   
+  .field
+    =f.hidden_field :copyright , :value => current_user.names 
     
   .field
     =f.label :image

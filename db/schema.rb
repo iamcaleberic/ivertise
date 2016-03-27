@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325173458) do
+ActiveRecord::Schema.define(version: 20160327063206) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160325173458) do
     t.integer  "release_form_file_size"
     t.datetime "release_form_updated_at"
     t.boolean  "approved"
+    t.string   "copyright"
   end
 
   create_table "roles", force: :cascade do |t|

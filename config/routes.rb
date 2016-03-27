@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   #get 'static/terms_and_conditions'
   #get 'static/privacy_policy'
-
+  get 'photos/pending'
+  get  'photos/disapproved'
   get 'home/images'
   get 'home/models'
   get 'home/muas'

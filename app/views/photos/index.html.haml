@@ -17,13 +17,32 @@
               = image_tag p.image(:large)
 
               / = p.role_photo
-
+/ = form_for @page do |form|
+/   = form.cktext_area :notes, :class => 'someclass', :ckeditor => {:language => 'uk'}
+/   = form.cktext_area :content, :value => 'Default value', :id => 'sometext'  
+/   = cktext_area :page, :info, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'}
 = current_user.role.name
-/ - if @posts.present?
-/   = render @posts
-/ - else
-/   %p
-/     There are no posts containing the term(s) #{params[:search]}
+
+-if current_user.role.name=="admin"
+  .ui.vertical.menu
+    .item
+      .header Images
+      .menu
+        =link_to "Pending approval" , photos_pending_path , class: "item"
+        =link_to "Disapproved" , photos_disapproved_path , class: "item"
+    .item
+      .header All Users
+      .menu
+        %a.item Contributors
+        %a.item Models
+        %a.item Photographers
+        %a.item MUAs
+    .item
+      .header Content
+      .menu
+        %a.item.active Terms
+        %a.item Privacy    
+        %a.item FAQs
 
 :javascript
   $(document).ready(function(){
@@ -37,9 +56,9 @@
     });
   });
 
-  $(function(){
-    $('#elastic_grid_demo').elastic_grid({
-      'showAllText' : 'All',
-      'items': [{}]
-    });
-  });
+  / $(function(){
+  /   $('#elastic_grid_demo').elastic_grid({
+  /     'showAllText' : 'All',
+  /     'items': [{}]
+  /   });
+  / });
