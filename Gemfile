@@ -50,4 +50,5 @@ gem 'sweet-alert', '~> 0.0.7'
 
 gem 'rails_12factor'
 gem 'contact_us'
+gem 'ckeditor'
 
