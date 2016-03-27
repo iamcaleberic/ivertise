@@ -18,6 +18,7 @@
     =f.text_field :price, placeholder: 'Image Price'
   -if current_user.role.name == "contributor"
     .field
+      *required for RM/RF images
       =f.label :release_form
       = f.file_field :release_form
     
