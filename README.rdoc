@@ -1,6 +1,6 @@
 == README
 
-This Is a stock photography website in Rails Framework
+This Is a stock photography application in Rails Framework
 
 Things you may want to use:
 
