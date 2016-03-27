@@ -2,7 +2,7 @@
 
 This Is a stock photography website in Rails Framework
 
-Things you may want to cover:
+Things you may want to use:
 
 * Ruby 2.2.1
 
