@@ -1,0 +1,7 @@
+I"t(function() {
+  jQuery(function() {
+    return console.log($('#photos').data('photos'));
+  });
+
+}).call(this);
+:ET

@@ -4,7 +4,7 @@
 		<div id="masonry-grid">
 			<% @photos.each do |photo| %>
 			<div>
-				<p>phots by <%#= photo.username%></p>
+				<p>photos by <%#= photo.username%></p>
 			</div>
 			<div id="picha">
 				<div class="ui card">
@@ -27,8 +27,10 @@
 </script>
 
 
+
+
 <h1>EXPERIMENT ON Zed CARDS </h1>
-<div id="elastic_grid_demo"></div>
+<div id="elastic_grid_demo masonry-grid"></div>
 
 <!-- Initial Script -->
     <script type="text/javascript">
@@ -138,3 +140,7 @@
             });
         });
     </script>
+
+<!--<div id="photos" data-url="<%= photos_url %>">
+    
+</div>-->
