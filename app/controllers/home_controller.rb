@@ -9,6 +9,8 @@ class HomeController < ApplicationController
     if admin_signed_in?
     	render 'admin/index'
     end
+
+    
   end
 
   def images

@@ -1,16 +1,43 @@
 =render 'layouts/pheader'
-%br
-%br
-=image_tag("logo.png")
-%center
-	#searchb.ui.action.input
-		%input{:placeholder => "Search Models...", :type => "text"}
-			%button.ui.icon.button
-				%i.search.icon
+/ %br
+/ %br
+/ -#=image_tag("logo.png")
+/ %center
+/ 	#searchb.ui.action.input
+/ 		%input{:placeholder => "Search Models...", :type => "text"}
+/ 			%button.ui.icon.button
+/ 				%i.search.icon
 
-#masonry-grid{style: 'margin-left: 8%;'}
-	-@photos.each do |p|
-		#picha
-			.ui.card
-				.image
-					= image_tag p.image(:large) if p.role_photo == "model"
+/ #masonry-grid{style: 'margin-left: 8%;'}
+/ 	-#-@photos.each do |p|
+/ 		#picha
+/ 			.ui.card
+/ 				.image
+/ 					-#= image_tag p.image(:large) if p.role_photo == "model"
+
+-#-@array = []
+-#-@photos.each do |p|
+-#	= p.image
+-#	-hash= {:title => "image", :description => "description", :thumbnail => "#{p.image}", :large => "#{p.image}", :tags => "tags"}
+-#    
+-#= @me.to_json-#
+
+
+%link{:href => "/assets/default.css", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "/assets/component.css", :rel => "stylesheet", :type => "text/css"}/
+
+.container
+  .main
+    %ul#og-grid.og-grid
+      -@photos.each do |p|
+        %li
+          %a{"data-description" => "Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.", "data-largesrc" => "#{p.image(:large)}", "data-title" => "Azuki bean", :href => "http://cargocollective.com/jaimemartinez/"}
+            %img{:alt => "img01", :src => "#{p.image(:thumb)}"}/
+
+/ /container
+%script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+%script{:src => "/assets/grid.js"}
+:javascript
+  $(function() {
+  	Grid.init();
+  });
