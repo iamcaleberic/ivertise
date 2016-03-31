@@ -2,27 +2,19 @@
 
 :css
   .top{
-    margin-top: 2%;
+    margin-top: 5%;
   }
 
 .top
-  #masonry-grid{style: 'margin-left: 8%;'}
+  #masonry-grid{style: 'margin-left: 6%;'}
     %center
       -@pic.each do |p|
         #picha
           .ui.card
             .image
               = image_tag p.image(:large)
-              / = p.role_photo
-      /this calls the data using javascript comment out the rest ans check it in the console
-      /-#= content_tag "div", id: "photos", data: {url: Photo.limit(10) } do
 
 
-/ = form_for @page do |form|
-/   = form.cktext_area :notes, :class => 'someclass', :ckeditor => {:language => 'uk'}
-/   = form.cktext_area :content, :value => 'Default value', :id => 'sometext'  
-/   = cktext_area :page, :info, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'}
-= current_user.role.name
 
 -if current_user.role.name=="admin"
   .ui.vertical.menu
@@ -45,8 +37,6 @@
         %a.item Privacy    
         %a.item FAQs
 
-
-
 :javascript
   $(document).ready(function(){
     var $container = jQuery('#masonry-grid');
@@ -58,5 +48,4 @@
       });
     });
   });
-
   

@@ -1,9 +1,6 @@
 -if user_signed_in?
 -else
   = render 'layouts/menu'
-  / end
-  / <h1>Hello</h1>
-  / banner and search
   .banner
     %center
       #search.ui.action.input
@@ -30,46 +27,20 @@
           #masonry-grid{style: 'margin-left: 8%;'}
 
             -@photos.each do |p|
-              #picha
+              #picha-all
                 .ui.card
                   .image
                     = image_tag p.image(:large)
-                    =p.role_photo
-
-          :javascript
-            $(document).ready(function(){
-              var $container = jQuery('#masonry-grid');
-              // initialize
-              $container.imagesLoaded(function(){
-                $container.masonry({
-                  columnWidth: 50,
-                  itemSelector: '#picha'
-                });
-              });
-            });
-
+                    
         .ui.bottom.attached.tab.segment{"data-tab" => "second"}
          
           #masonry-grid{style: 'margin-left: 8%;'}
             -@photos.each do |p|
-              #picha
+              #picha-two
                 .ui.card
                   .image
                     = image_tag p.image(:large) if p.role_photo =="contributor"
 
-            :javascript
-              $(document).ready(function(){
-                var $container = jQuery('#masonry-grid');
-                // initialize
-                $container.imagesLoaded(function(){
-                  $container.masonry({
-                    columnWidth: 50,
-                    itemSelector: '#picha'
-                  });
-                });
-              });
-    
-                   
         .ui.bottom.attached.tab.segment{"data-tab" => "third"}
           #masonry-grid{style: 'margin-left: 8%;'}
             -@photos.each do |p|
@@ -78,18 +49,6 @@
                   .image
                     = image_tag p.image(:large) if p.role_photo =="MUA"
 
-            :javascript
-              $(document).ready(function(){
-                var $container = jQuery('#masonry-grid');
-                // initialize
-                $container.imagesLoaded(function(){
-                  $container.masonry({
-                    columnWidth: 50,
-                    itemSelector: '#picha'
-                  });
-                });
-              });
-    
         .ui.bottom.attached.tab.segment{"data-tab" => "four"}
 
           #masonry-grid{style: 'margin-left: 8%;'}
@@ -99,18 +58,6 @@
                   .image
                     = image_tag p.image(:large) if p.role_photo =="photographer"
 
-            :javascript
-              $(document).ready(function(){
-                var $container = jQuery('#masonry-grid');
-                // initialize
-                $container.imagesLoaded(function(){
-                  $container.masonry({
-                    columnWidth: 50,
-                    itemSelector: '#picha2'
-                  });
-                });
-              });
-    
         .ui.bottom.attached.tab.segment{"data-tab" => "five"}
           #masonry-grid{style: 'margin-left: 8%;'}
             -@photos.each do |p|
@@ -118,24 +65,18 @@
                 .ui.card
                   .image
                     = image_tag p.image(:large) if p.role_photo =="model"
-            :javascript
-              $(document).ready(function(){
-                var $container = jQuery('#masonry-grid');
-                // initialize
-                $container.imagesLoaded(function(){
-                  $container.masonry({
-                    columnWidth: 50,
-                    itemSelector: '#picha'
-                  });
-                });
-              });
-            
 
   = render "layouts/footer"
-   
-  
-  :javascript
-    $(document).ready(function(){
-      $('.tabular.menu .item').tab();
+
+:javascript
+  $(document).ready(function(){
+    var $container = jQuery('#masonry-grid');
+    // initialize
+    $container.imagesLoaded(function(){
+      $container.masonry({
+        columnWidth: 50,
+        itemSelector: '#picha-all'
+      });
     });
-    $('.menu .item').tab();
+  });
+  

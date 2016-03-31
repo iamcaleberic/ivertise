@@ -5,16 +5,12 @@
     %title Ivertise
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-
-    = javascript_include_tag 'modernizr.custom', 'data-turbolinks-track' => true
-
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %script{:src => "https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"}
     = favicon_link_tag "favicon.ico"
+    %script{:src => "/assets/modernizr.custom.js"}
 
-    
-    
     :css
       body{
       	height: 0px;
@@ -22,31 +18,18 @@
       .error{
         margin-top: 5%;
       }
-    :javascript
-        / $(document).ready(function(){
-        /   var $container = jQuery('#masonry-grid');
-        /   // initialize
-        /   $container.imagesLoaded(function(){
-        /     $container.masonry({
-        /       columnWidth: 50,
-        /       itemSelector: '#picha'
-        /     });
-        /   });
-        / });
-    
-        
+
   %body
+
     - flash.each do |key, value|
       %div{:class => "text-center #{flash_class(key)}"}
         = value
+        
     #container
-    %br
-    %br
-    %br
-
       = yield
 
-:javascript
-  $(function() {
-    Grid.init();
-  });
+  :javascript
+    $(document).ready(function(){
+      $('.tabular.menu .item').tab();
+    });
+    $('.menu .item').tab();

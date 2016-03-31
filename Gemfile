@@ -17,6 +17,7 @@ gem 'cancancan'
 
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -34,18 +35,13 @@ gem 'chosen-rails'
 gem 'devise'
 gem 'paperclip'
 gem 'paperclip-watermark'
-#temporary til we can replace with semantic ish
-# gem 'bootstrap-sass'
 gem 'semantic-ui-sass'
-# gem 'bootstrap-will_paginate'
-
 
 gem 'haml-rails', '~> 0.9.0'
 gem "erb2haml", :group => :development
 
 gem 'will_paginate'
 gem 'public_activity'
-# gem 'site-map-generator'
 gem 'sweet-alert', '~> 0.0.7'
 
 gem 'rails_12factor'

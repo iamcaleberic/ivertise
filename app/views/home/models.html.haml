@@ -32,8 +32,12 @@
       -@photos.each do |p|
         %li
           %a{"data-description" => "#{p.price}", "data-largesrc" => "#{p.image(:large)}", "data-title" => "#{p.title}", :href => ""}
-            %img{:alt => "img01", :src => "#{p.image(:thumb)}"}/
+            %img{:alt => "img01", :src => "#{p.image(:large)}"}/
 
-/ /container
 %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
 %script{:src => "/assets/grid.js"}
+
+:javascript
+  $(function() {
+    Grid.init();
+  });
